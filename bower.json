@@ -1,9 +1,8 @@
 {
   "name": "scbd-angularjs-branding",
-  "version": "1.0.0",
   "homepage": "https://github.com/scbd/scbd-angularjs-branding",
   "authors": [
-    "SCBD"
+    "Randy Houlahan <randy.houlahan@cbd.int>"
   ],
   "dependencies": {
     "angular"                     : "1.4.8",
@@ -15,7 +14,23 @@
     "jquery"                      : "2.2.0",
     "lodash"                      : "3.9.3",
     "moment"                      : "2.11.1",
-    "scbd-angularjs-services"     : "1.1.0"
+    "scbd-angularjs-services"     : "1.1.0",
 
-  }
+  },
+  "description": "SCBD shared branding directives",
+  "main": "main.js",
+  "moduleType": [],
+  "keywords": [
+    "branding",
+    "scbd"
+  ],
+  "license": "yes",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/libs",
+    "test",
+    "tests"
+  ]
 }
