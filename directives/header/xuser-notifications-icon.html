@@ -1,0 +1,34 @@
+<li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
+  <a id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg"  ng-click="userNotifications.viewAll=!userNotifications.viewAll;" >
+      <span ng-show="(notifications|filter:isUnread).length > 0 " >
+          <i class="fa fa-bell color-cbdlitegrey"></i>
+          <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
+      </span>
+      <span ng-show="(notifications|filter:isUnread).length <= 0">
+          <i class="fa fa-bell-o" class="bg-grey"></i>
+      </span>
+  </a>
+
+  <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" >
+      <span ng-show="(notifications|filter:isUnread).length > 0 " >
+          <i class="fa fa-bell color-cbdlitegrey"></i>
+          <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span>
+      </span>
+      <span ng-show="(notifications|filter:isUnread).length <= 0">
+          <i class="fa fa-bell-o" class="bg-grey"></i>
+      </span>
+  </a>
+
+  <div class="dropdown-menu hidden-xs " role="menu" aria-labelledby="dLabel">
+    <div class="panel n-drop-down" style="width:500px;padding:0;margin:0;z-index:1100;">
+      <div class="panel-body">
+        <div xuser-notifications hide-close-button="true"></div>
+      </div>
+      <div class="panel-footer">
+        <a ng-click="showInView()" style="cursor:pointer;">
+          <h4 class="color-cbdgrey">View all <i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+        </a>
+      </div>
+    </div>
+  </div>
+</li>

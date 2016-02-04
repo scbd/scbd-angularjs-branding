@@ -1,0 +1,79 @@
+.navbar-cbd-account {
+  font-size: 16px;
+  margin-bottom: 0;
+  z-index: 100;
+  list-style-type: none;
+  padding: 0px 0px 0px 0px;
+  margin: 0 0 0 0;
+  line-height: 30px;
+  font-weight: 200;
+}
+.fa-fix {
+  left: 0px;
+}
+.user-logged-in {
+  color: #bdbdbd;
+  cursor: pointer;
+  font-size: 80%;
+  position: absolute;
+  left: -16px;
+}
+@media screen and (max-width: 480px) {
+  .drop-menu-position {
+    position: absolute;
+    left: -150px;
+    top: 23px;
+  }
+}
+@media screen and (min-width: 250px) {
+  .drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
+  .dropdown-menu li a {
+    font-size: 16px;
+  }
+  .dropdown-menu > li > a:hover {
+    color: #428bca!important;
+  }
+  .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #009b48;
+    color: white;
+  }
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+    background-image: none;
+  }
+}
+@media screen and (min-width: 480px) {
+  #dropdown-menu a {
+    color: black;
+    font-size: 14px;
+  }
+  .drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
+  .dropdown-menu {
+    background-color: white;
+    padding: 3px;
+  }
+  .navbar-default .navbar-nav .dropdown-menu li {
+    margin: 0;
+    padding: 0;
+  }
+  .dropdown-menu > li > a:hover {
+    color: #428bca!important;
+  }
+  .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #009b48;
+  }
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+    background-image: none;
+  }
+}
+@media screen and (min-width: 810px) {
+  .drop-menu-position {
+    position: absolute;
+    left: 0px;
+  }
+}
