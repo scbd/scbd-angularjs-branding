@@ -5,6 +5,17 @@ define(['app',
   'scbd-angularjs-filters/l-string',
   'scbd-angularjs-services/user-notifications'],
 function(app,template,_,moment) {
+    app.service("cfgUserNotification", function(){
+        var notificationUrls = {
+            documentNotificationUrl     : '/register/requests/',
+            viewAllNotificationUrl      : '/register/requests',
+            documentMessageUrl          : '/mailbox/'
+        };
+
+        return {
+            notificationUrls : notificationUrls
+        };
+    });
     app.directive('xuserNotifications', function() {
         return {
             restrict: 'EAC',
@@ -22,8 +33,10 @@ function(app,template,_,moment) {
                 $scope.hideCloseButton=0;
 
             },
-            controller: ['$scope', '$rootScope', 'IUserNotifications', '$timeout', '$filter','authentication',
-                function($scope, $rootScope, userNotifications, $timeout, $filter, authentication) {
+            controller: ['$scope', '$rootScope', 'IUserNotifications',
+                        '$timeout', '$filter','authentication','cfgUserNotification',
+                function($scope, $rootScope, userNotifications, $timeout, $filter,
+                        authentication, cfgUserNotification) {
 
 
                     var pageNumber = 0;
@@ -181,10 +194,15 @@ function(app,template,_,moment) {
 
                     $scope.getURL = function(notification){
                         //console.log(notification)
+                        if(cfgUserNotification.notificationUrls &&
+                        !cfgUserNotification.notificationUrls.documentNotificationUrl)
+                            throw "Invalid User Notification Configuration, documentNotificationUrl is missing.";
+
                         if(notification.type=='documentNotification')
-                            return '/register/requests/' + notification.data.workflowId;
+                            return cfgUserNotification.notificationUrls.documentNotificationUrl
+                                    + notification.data.workflowId;
                         else
-                            return '/mailbox/' + notification.id;
+                            return cfgUserNotification.notificationUrls.documentMessageUrl + notification.id;
                     }
 
                     $rootScope.$on('onNotificationStatusChanged', function(evt,data){

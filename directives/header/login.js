@@ -31,7 +31,7 @@ app.directive('loginAccount', function ($http) {
                     $scope.waiting      = true;
                     authentication.signIn($scope.email, $scope.password)
                     .then(function(user){
-                            //$scope.onUserLogin(user);
+                          
                           $scope.user=user;
                           $timeout(function(){$('#loginDialog').modal('hide');});
                     })
