@@ -1,8 +1,8 @@
 define(['app',
-'text!./login.html',
-  'jquery',
- 'css!./login',
-   '../../../scbd-angularjs-services/services/authentication',
+    'text!./login.html',
+    'jquery',
+    'css!./login',
+    'scbd-angularjs-services/authentication',
 ], function (app,template,$) {
 
 app.directive('loginAccount', function ($http) {
@@ -31,6 +31,7 @@ app.directive('loginAccount', function ($http) {
                     $scope.waiting      = true;
                     authentication.signIn($scope.email, $scope.password)
                     .then(function(user){
+                            //$scope.onUserLogin(user);
                           $scope.user=user;
                           $timeout(function(){$('#loginDialog').modal('hide');});
                     })

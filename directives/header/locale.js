@@ -1,7 +1,7 @@
 define(['app',
  'text!./locale.html',
   'css!./locale',
-  '../../../scbd-angularjs-services/services/authentication',
+  'scbd-angularjs-services/authentication',
 ],
 function(app, template, $) {
      app.directive('localeHeader', function() {

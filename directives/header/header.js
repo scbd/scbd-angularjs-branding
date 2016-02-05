@@ -4,16 +4,14 @@ define(['app',
   'jquery',
   'css!/app/libs/scbd-angularjs-branding/css/colors',
   'css!./header',
-  'css!font-awsome-css',
-  'css!../../../angular-material/angular-material.min',
-  '../../../scbd-angularjs-services/services/authentication',
+  'scbd-angularjs-services/authentication',
   './account',
   './locale',
   './accounts-validation',
   './login',
   './xuser-notifications',
   './xuser-notifications-icon',
-  '../../../scbd-angularjs-services/services/user-notifications'
+  'scbd-angularjs-services/user-notifications'
 ],
 function(app, template, $) {
      app.directive('scbdHeader', function() {

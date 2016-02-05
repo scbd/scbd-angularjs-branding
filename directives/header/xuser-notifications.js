@@ -1,12 +1,9 @@
 define(['app',
-  'text!./xuser-notifications.html',
-  '../../../lodash/lodash',
-  '../../../moment/moment',
-  '../../../ionsound/js/ion.sound.min',
+  'text!./xuser-notifications.html','underscore','moment',
   'css!./xuser-notifications',
-  '../../../scbd-angularjs-services/filters/schema-name',
-  '../../../scbd-angularjs-services/filters/l-string',
-  '../../../scbd-angularjs-services/services/user-notifications'],
+  'scbd-angularjs-filters/schema-name',
+  'scbd-angularjs-filters/l-string',
+  'scbd-angularjs-services/user-notifications'],
 function(app,template,_,moment) {
     app.directive('xuserNotifications', function() {
         return {

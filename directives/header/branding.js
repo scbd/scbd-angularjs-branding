@@ -1,11 +1,8 @@
 define(['app',
  'text!./account.html',
   'jquery',
-  
   'css!./account',
-  'css!font-awsome-css',
-  'css!bootstrap-css',
-  '../../../scbd-angularjs-services/services/authentication',
+  'scbd-angularjs-services/authentication',
 ],
 function(app, template, $) {
      app.directive('scbdHeaderAccount', function() {
