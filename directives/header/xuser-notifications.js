@@ -1,5 +1,5 @@
 define(['app',
-  'text!./xuser-notifications.html','underscore','moment',
+  'text!./xuser-notifications.html','lodash','moment','ionsound',
   'css!./xuser-notifications',
   'scbd-angularjs-filters/schema-name',
   'scbd-angularjs-filters/l-string',
