@@ -1,34 +1,44 @@
-<div class="header bg-white">
+<div class="header bg-white" >
   <!-- sign in -->
-  <accounts-validation-header></accounts-validation-header>
-  <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">
+  <accounts-validation-header ></accounts-validation-header>
+  <div id="portal-mobi-header"  class="  navbar-cbd bg-white " id="anchorTop" hide-gt-xs>
+        <span  hide-gt-xs style="padding: 2px 0 0 2px;">
+          <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
+          <span class="brand"> {{portalName}}</span>
+        </span>
+  </div>
+
+  <nav  class=" navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" hide-xs>
 
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header ">
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
+            <div class="navbar-header ">
+              <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
 
-        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left">
-          <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
-          <span class="brand">CBD</span>
-        </span>
 
-        <account-header user="user" style="position:absolute;right:90px;top:7px;"></account-header>
-        <xuser-notifications-icon  style="position:absolute;right:45px;top:5px;" ></xuser-notifications-icon>
-        <locale-header style="position:absolute;right:10px;top:-1px;"></locale-header>
-      </div>
+              <span  hide-gt-xs style="padding: 2px 0 0 2px;">
+                <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
+                <span class="brand"> {{portalName}}</span>
+              </span>
+              <account-header user="user" style="position:absolute;right:90px;top:7px;" hide-xs></account-header>
 
-      <ul class="navbar-left navlist hidden-xs hidden-sm">
-        <li ng-if="toggleMenu" ><a href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
-        <li ng-if="toggleMenu"><a href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
-        <li ng-if="toggleMenu"><a href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
-        <li ng-if="toggleMenu"><a href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
-        <li ng-if="toggleMenu"><a href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
-        <li ng-if="toggleMenu"><a href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
-      </ul>
+              <xuser-notifications-icon  style="position:absolute;right:90px;top:7px;z-index1001;" ></xuser-notifications-icon>
+              <locale-header style="position:absolute;right:10px;top:-1px;" hide-xs></locale-header>
+            </div>
+
+            <ul class="navbar-left navlist hidden-xs hidden-sm" hide-xs>
+              <li ng-if="toggleMenu" ><a href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
+              <li ng-if="toggleMenu"><a href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
+              <li ng-if="toggleMenu"><a href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
+              <li ng-if="toggleMenu"><a href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
+              <li ng-if="toggleMenu"><a href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
+              <li ng-if="toggleMenu"><a href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
+            </ul>
+
+
+        <login-account user="user" ></login-account>
+    </div>
   </nav>
-
-  <login-account user="user" ></login-account>
   <!-- <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -47,6 +57,131 @@
 
 </div>
 
+<!-- cbd mobi menu -->
+<div id="portal-mobi-footer" hide-gt-xs>
+  <div class="md-toolbar-tools" style="max-height: 30px;">
+    <md-icon md-font-set="material-icons color-white" style="margin: 0 0 0 0;" ng-click="toggleCbdMenu()">menu</md-icon>
+    <account-header user="user"  ></account-header>
+    <span flex></span>
+    <span>
+      <img src="/app/libs/scbd-branding/images/cbd-leaf-white.svg" class="header-nav-img" />
+      <span>CBD</span>
+    </span>
+    <span flex></span>
+    <md-icon md-font-set="material-icons color-white" style="margin: 0 0 0 0;" ng-click="toggleNotMenu()">notifications</md-icon>
+    <md-icon md-font-set="material-icons color-white" style="padding: 0 15px 0 15px;;margin: 0 0 0 0;" ng-click="toggleLocaleMenu()">language</md-icon>
+  </div>
+</div>
+<!-- color="#ffffff" back-ground="#009b48" close-btn-color='#ffffff'  toggle-color="#ffffff" toggle-back-ground="#009b48" link-color="#ffffff" link-back-ground="#009b48"-->
+<scbd-side-menu id="cbd-menu" sections="cbdMenu">
+  <md-toolbar  style="background-color:#009b48;">
+      <img src="/app/libs/scbd-branding/images/cbd-logo-white-en.svg" style="padding:3px 0 3px 0;" />
+  </md-toolbar>
+</scbd-side-menu>
+<scbd-side-menu id="account-menu" sections="accMenu" hide-gt-xs>
+  <md-toolbar  style="background-color:#009b48;">
+    <div layout="column" class="md-toolbar-tools-bottom inset">
+      <span layout="row">
+    <span layout-align="end" flex="30">    <svg  class="user-avatar"   viewBox="0 0 128 128" height="64" width="64" pointer-events="none" display="block"> <path fill="#FF8A80" d="M0 0h128v128H0z"></path> <path fill="#FFE0B2" d="M36.3 94.8c6.4 7.3 16.2 12.1 27.3 12.4 10.7-.3 20.3-4.7 26.7-11.6l.2.1c-17-13.3-12.9-23.4-8.5-28.6 1.3-1.2 2.8-2.5 4.4-3.9l13.1-11c1.5-1.2 2.6-3 2.9-5.1.6-4.4-2.5-8.4-6.9-9.1-1.5-.2-3 0-4.3.6-.3-1.3-.4-2.7-1.6-3.5-1.4-.9-2.8-1.7-4.2-2.5-7.1-3.9-14.9-6.6-23-7.9-5.4-.9-11-1.2-16.1.7-3.3 1.2-6.1 3.2-8.7 5.6-1.3 1.2-2.5 2.4-3.7 3.7l-1.8 1.9c-.3.3-.5.6-.8.8-.1.1-.2 0-.4.2.1.2.1.5.1.6-1-.3-2.1-.4-3.2-.2-4.4.6-7.5 4.7-6.9 9.1.3 2.1 1.3 3.8 2.8 5.1l11 9.3c1.8 1.5 3.3 3.8 4.6 5.7 1.5 2.3 2.8 4.9 3.5 7.6 1.7 6.8-.8 13.4-5.4 18.4-.5.6-1.1 1-1.4 1.7-.2.6-.4 1.3-.6 2-.4 1.5-.5 3.1-.3 4.6.4 3.1 1.8 6.1 4.1 8.2 3.3 3 8 4 12.4 4.5 5.2.6 10.5.7 15.7.2 4.5-.4 9.1-1.2 13-3.4 5.6-3.1 9.6-8.9 10.5-15.2M76.4 46c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6-.1-.9.7-1.6 1.6-1.6zm-25.7 0c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6-.1-.9.7-1.6 1.6-1.6z"></path> <path fill="#E0F7FA" d="M105.3 106.1c-.9-1.3-1.3-1.9-1.3-1.9l-.2-.3c-.6-.9-1.2-1.7-1.9-2.4-3.2-3.5-7.3-5.4-11.4-5.7 0 0 .1 0 .1.1l-.2-.1c-6.4 6.9-16 11.3-26.7 11.6-11.2-.3-21.1-5.1-27.5-12.6-.1.2-.2.4-.2.5-3.1.9-6 2.7-8.4 5.4l-.2.2s-.5.6-1.5 1.7c-.9 1.1-2.2 2.6-3.7 4.5-3.1 3.9-7.2 9.5-11.7 16.6-.9 1.4-1.7 2.8-2.6 4.3h109.6c-3.4-7.1-6.5-12.8-8.9-16.9-1.5-2.2-2.6-3.8-3.3-5z"></path> <circle fill="#444" cx="76.3" cy="47.5" r="2"></circle> <circle fill="#444" cx="50.7" cy="47.6" r="2"></circle> <path fill="#444" d="M48.1 27.4c4.5 5.9 15.5 12.1 42.4 8.4-2.2-6.9-6.8-12.6-12.6-16.4C95.1 20.9 92 10 92 10c-1.4 5.5-11.1 4.4-11.1 4.4H62.1c-1.7-.1-3.4 0-5.2.3-12.8 1.8-22.6 11.1-25.7 22.9 10.6-1.9 15.3-7.6 16.9-10.2z"></path> </svg>
+</span>
+<h4  layout-align="end" flex="70"></h4>
+      </span>
+        <span></span>
+        <div style="font-size:16;font-weight:500;">{{user.name}}</div>
+        <div style="font-size:16;font-weight:500;">{{user.email}}</div>
+      </div>
+  </md-toolbar>
+</scbd-side-menu>
+
+<scbd-side-menu id="notifications-menu" side="right" hide-gt-xs>
+  <md-toolbar  style="background-color:#009b48;">
+    <div layout="column" class="md-toolbar-tools-bottom inset">
+    <span layout="row">
+      <span layout-align="end" flex="30"><icon class="fa fa-bell fa-2x" style="margin-top:20px;padding-left:30px;height:125px;"></icon></span>
+      <h2  layout-align="end" flex="70">Notifications</h2>
+    </span>
+  </div>
+    <div xuser-notifications hide-close-button="true"></div>
+  </md-toolbar>
+</scbd-side-menu>
+<scbd-side-menu id="locale-menu" sections="localeMenu" side="right" hide-gt-xs>
+  <md-toolbar  style="background-color:#009b48;">
+    <div layout="column" class="md-toolbar-tools-bottom inset">
+    <span layout="row">
+      <span layout-align="end" flex="30"><icon class="fa fa-bell fa-2x" style="margin-top:20px;padding-left:30px;height:125px;"></icon></span>
+      <h2  layout-align="end" flex="70">Languages</h2>
+    </span>
+  </div>
+  </md-toolbar>
+</scbd-side-menu>
+<!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="cbd-menu"   >
+  <md-toolbar class="md-theme-indigo" style="background-color:#009b48;">
+
+      <img src="/app/libs/scbd-branding/images/cbd-logo-white-en.svg" style="padding:3px 0 3px 0;" />
+
+
+
+  </md-toolbar>
+  <md-content  >
+    <md-list>
+    <md-list-item class="md-1-line" md-ink-ripple="#FF0000" >
+
+        <a href="https://www.cbd.int/convention/text/">Text of the Convention</a>
+
+    </md-list-item>
+  </md-list>
+
+
+
+  </md-content>
+</md-sidenav> -->
 <!-- <xuser-notifications ng-if="userNotifications.viewAll" ></xuser-notifications> -->
 
 <!-- class="hidden-md hidden-lg" -->
+<!-- <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="md-1-line panel-heading" href="#collapse1" data-toggle="collapse" data-parent="#accordion" >
+
+      <h4 class="panel-title">
+        Collapsible Group 1
+      </h4>
+
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+
+        <ul>
+            <li><a href="https://www.cbd.int/convention/text/">Text of the Convention</a></li>
+            <li><a href="https://www.cbd.int/convention/parties/list/">List of Parties</a></li>
+            <li><a href="https://www.cbd.int/sp/">Strategic Plan</a></li>
+            <li><a href="https://www.cbd.int/programmes/">Programmes and Issues</a></li>
+            <li><a href="https://www.cbd.int/cooperation/">Cooperation &amp; Partnerships</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+    </div>
+  </div>
+</div> -->

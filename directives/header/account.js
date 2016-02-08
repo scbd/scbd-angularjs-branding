@@ -1,9 +1,10 @@
 define(['app',
- 'text!./account.html',
-  'css!./account',  
+  'text!./account.html',
+  'lodash',
+  'css!./account',
   'scbd-angularjs-services/authentication',
 ],
-function(app, template) {
+function(app, template,_) {
      app.directive('accountHeader', function() { // parent directive header
 
          return { restrict: 'E' ,
@@ -12,8 +13,8 @@ function(app, template) {
                   scope: {
                        user: '=',
                   },
-                  controller: ['$scope', '$window', '$location','authentication',
-                  function($scope, $window, $location,authentication) {
+                  controller: ['$scope', '$window', '$location','authentication','scbdMenuService',
+                  function($scope, $window, $location,authentication,scbdMenuService) {
                     if(!$scope.user || !$scope.user.isAuthenticated )
                       getUser();
                     //==========================
@@ -22,13 +23,34 @@ function(app, template) {
                     function getUser() {
                       return authentication.getUser().then(function(u){
                     		$scope.user = u;
+                        scbdMenuService.accMenu[1].pages=[];
+                        _.each($scope.user.roles,function(role){
+                          $scope.accMenu=scbdMenuService.accMenu;
+                          $scope.accMenu[1].pages.push(
+                          {
+                            name: role,
+                            type: 'link',
+                            state: 'https://accounts.cbd.int/profile',
+                            faIcon: 'fa fa-users',
+                            faIconSize: 'fa-lg',
+                          });
+                          $scope.accMenu[3].state=$scope.actionSignOut;
                 			});
-                    }
+                    });
+                  }
+
+
+
+                    $scope.toggleAccountMenu=scbdMenuService.toggle('account-menu',$scope);
+
+
+
                     //==========================
                     //
                     //============================================================
                     $scope.actionSignOut = function() {
                         authentication.signOut().then(function(){getUser();});
+                        getUser();
                     };
 
                     //============================================================

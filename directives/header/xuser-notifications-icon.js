@@ -6,7 +6,6 @@ function(app,template) {
             restrict: 'E',
             replace: true,
             template: template,
-
             controller: ['$scope',  'IUserNotifications', 'cfgUserNotification',
                 function($scope,  userNotifications, cfgUserNotification) {
                     $scope.userNotifications=userNotifications;

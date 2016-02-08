@@ -1,4 +1,4 @@
-<div ng-if="user">
+<div ng-if="user" hide-xs>
 
   <a ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-cbdlitegrey" data-slug="signin" data-toggle="modal" data-target="#loginDialog"><i  class="fa fa-power-off"></i> <strong>SIGN IN </strong></a>
   <a ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
@@ -21,7 +21,7 @@
         <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
     </li>
     <li class="dropdown-submenu">
-      <a tabindex="-1" href="#"><i class="fa fa-users" style="font-size:15px"></i>&nbsp; My Roles</a>
+      <a tabindex="-1" href="#"><i class="fa fa-users" style="font-size:15px"></i>&nbsp; Roles</a>
       <ul class="dropdown-menu bg-darkgrey" role="menu" style="min-width:200px">
         <li ng-repeat="role in user.roles|orderBy:'toString()'"><a tabindex="-1" href="#">{{role}}</a></li>
       </ul>
@@ -35,4 +35,9 @@
         <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
     </li>
   </ul>
+</div>
+
+<div ng-if="user" hide-gt-xs>
+  <md-icon ng-if="!user.isAuthenticated" md-font-set="material-icons color-white" style="padding-left:15px;margin: 0 0 0 0;" data-slug="signin" data-toggle="modal" data-target="#loginDialog">person</md-icon>
+  <md-icon ng-if="user.isAuthenticated" md-font-set="material-icons color-white" style="padding-left:15px;margin: 0 0 3px 0;" ng-click="toggleAccountMenu()">person</md-icon>
 </div>
