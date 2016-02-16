@@ -11,7 +11,6 @@ define(['app',
   './login',
   './xuser-notifications',
   './xuser-notifications-icon',
-  'scbd-angularjs-services/user-notifications',
   '../side-menu/scbd-side-menu',
   '../side-menu/scbd-menu-service'
 ],
@@ -23,12 +22,14 @@ function(app, template, $) {
                   scope: {
                        portalName: '@',
                   },
-                  controller: ['$scope','$element', '$attrs','$window', '$location','authentication','IUserNotifications','$mdSidenav', '$mdUtil','$mdMedia','$timeout','$log','scbdMenuService',
-                  function($scope, $element, $attrs,$window, $location,authentication,userNotifications,$mdSidenav, $mdUtil,$mdMedia,$timeout,$log,scbdMenuService) {
+                  controller: ['$scope','$element', '$attrs','$window', '$location','authentication','$mdSidenav', '$mdUtil','$mdMedia','$timeout','$log','scbdMenuService',
+                  function($scope, $element, $attrs,$window, $location,authentication,$mdSidenav, $mdUtil,$mdMedia,$timeout,$log,scbdMenuService) {
+                      if (window.innerWidth <= 600)
+                        $scope.isXS = true;
                       authentication.getUser().then(function(u){
                     	     $scope.user = u;
                            $scope.toggleMenu=0;
-                           $scope.userNotifications=userNotifications;
+
                 			});
 
                       $scope.portalName=$attrs.protalName;

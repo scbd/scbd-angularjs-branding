@@ -1,7 +1,9 @@
 
 define(['app',
  'text!./scbd-side-menu.html',
+
    'lodash',
+     'css!./scbd-side-menu',
   'css!./scbd-side-menu',
   './menu-toggle',
   './menu-link',

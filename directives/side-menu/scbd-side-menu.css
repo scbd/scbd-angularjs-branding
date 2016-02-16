@@ -1,10 +1,4 @@
 
-Angular Material Side Menu
-Code
-Preview
-                    style.css
-
-/* Styles go here */
 
 md-sidenav {
   overflow: visible;
@@ -39,8 +33,8 @@ md-sidenav {
 }
 
 .md-button-toggle .md-toggle-icon.toggled {
-  transform: rotateZ(180deg);
-  -webkit-transform: rotateZ(180deg);
+  transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
 }
 
 .md-button-toggle.toggled {
@@ -95,4 +89,4 @@ md-sidenav {
   padding-bottom: 12px;
 }
 
-                
+
