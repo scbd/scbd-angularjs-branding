@@ -15,12 +15,29 @@
   </div>
 
   <nav  class=" navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" hide-xs>
-
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header ">
-              <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
+              <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleCbdMenu()"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
 
+              <span  hide-gt-xs style="padding: 2px 0 0 2px;">
+                <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
+                <span class="brand"> {{portalName}}</span>
+              </span>
+              <account-header user="user" style="position:absolute;right:90px;top:7px;" hide-xs></account-header>
+
+              <xuser-notifications-icon  style="position:absolute;right:45px;top:7px;" ></xuser-notifications-icon>
+              <locale-header style="position:absolute;right:10px;top:-1px;" hide-xs></locale-header>
+            </div>
+
+    </div>
+</div>
+<!-- if IE9 -->
+  <!-- <nav  class=" navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" hide-xs>
+    <div class="container-fluid container-cbd bg-white">
+
+            <div class="navbar-header ">
+              <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
 
               <span  hide-gt-xs style="padding: 2px 0 0 2px;">
                 <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
@@ -40,11 +57,8 @@
               <li ng-if="toggleMenu"><a href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
               <li ng-if="toggleMenu"><a href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
             </ul>
-
-
-
     </div>
-  </nav>
+  </nav> -->
     <login-account user="user" ></login-account>
   <!-- <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -62,7 +76,7 @@
     </div>
   </div> -->
 
-</div>
+
 
 <!-- cbd mobi menu -->
 <div id="portal-mobi-footer" hide-gt-xs>
@@ -100,7 +114,7 @@
   </md-toolbar>
 </scbd-side-menu>
 
-<scbd-side-menu id="notifications-menu" side="right" ng-if="isXS">
+<scbd-side-menu id="notifications-menu" sections="notifications-menu" side="right" ng-if="isXS">
   <md-toolbar  style="background-color:#009b48;">
     <div layout="column" class="md-toolbar-tools-bottom inset">
     <span layout="row">
@@ -111,6 +125,7 @@
     <div xuser-notifications hide-close-button="true"></div>
   </md-toolbar>
 </scbd-side-menu>
+
 <scbd-side-menu id="locale-menu" sections="localeMenu" side="right" >
   <md-toolbar  style="background-color:#009b48;">
     <div layout="column" class="md-toolbar-tools-bottom inset">

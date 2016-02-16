@@ -8,6 +8,33 @@ define(['app'],function(app) {
       '$location','$timeout','$mdSidenav',
 
       function ($location,$timeout,$mdSidenav) {
+        var dashboard= [];
+        dashboard.push({
+          name: 'لعربية',
+          type: 'link',
+          mdIcon: 'language',
+          disabled:'true'
+        });
+        dashboard.push({
+          name: 'لعربية',
+          type: 'link',
+          mdIcon: 'language',
+          disabled:'true'
+        });
+        dashboard.push({
+          name: '中文',
+          type: 'link',
+          mdIcon: 'language',
+          disabled:'true'
+        });
+        dashboard.push({
+          name: 'English',
+          type: 'link',
+          mdIcon: 'language',
+
+        });
+
+
         var localeMenu= [];
         localeMenu.push({
           name: 'لعربية',
@@ -336,7 +363,8 @@ define(['app'],function(app) {
             close: close,
             cbdMenu:cbdMenu,
             accMenu:accMenu,
-            localeMenu:localeMenu
+            localeMenu:localeMenu,
+            dashboard:dashboard
           };
 
       }]);
