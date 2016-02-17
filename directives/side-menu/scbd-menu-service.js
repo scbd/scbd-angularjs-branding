@@ -28,12 +28,12 @@ define(['app'],function(app) {
           mdIcon: 'business',
 
         });
-        dashboard.push({
-          name: 'heading',
-          type: 'heading',
-
-
-        });
+        // dashboard.push({
+        //   name: 'heading',
+        //   type: 'heading',
+        //
+        //
+        // });
         dashboard.push({
           name: 'Administration',
           type: 'toggle',
@@ -60,7 +60,7 @@ define(['app'],function(app) {
 
           }, {
             name: 'Plevra Configuration',
-            state: 'https://www.cbd.int/convention/parties/list/',
+            path: '/manage/config',
             type: 'link',
             imgSrc: '/app/images/cbd-leaf-green.svg',
           },
@@ -395,12 +395,20 @@ define(['app'],function(app) {
         //
         //============================================================
         function close(navID) {
-            $mdSidenav(navID).toggle();
+            $mdSidenav(navID).toggle(false);
           }
+          //============================================================
+          //
+          //
+          //============================================================
+          function open(navID) {
+              $mdSidenav(navID).toggle(true);
+            }
           return  {
             isOpen:isOpenRight,
             toggle: buildDelayedToggler,
             close: close,
+            open: open,
             cbdMenu:cbdMenu,
             accMenu:accMenu,
             localeMenu:localeMenu,

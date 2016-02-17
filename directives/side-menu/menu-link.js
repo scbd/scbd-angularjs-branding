@@ -6,26 +6,31 @@ define(['app',
 
 ],
 function(app,template,_) {
-        app.directive('menuLink', function ($window) {
+        app.directive('menuLink', ['$window','$location',function ($window,$location) {
             return {
               scope: {
                 section: '='
               },
               template: template,
-              link: function ($scope ){
+              controller: function ($scope ){
               $scope.goTo = function (){
-                    if($scope.section.state && _.isFunction($scope.section.state)){
-                      $scope.section.state();
+                    // if path is a function call it
+                    if($scope.section.path && _.isFunction($scope.section.path)){
+                      $scope.section.path();
+
                     }
-                    else if($scope.section.state && _.isString($scope.section.state)){
-                      $window.location.href =$scope.section.state;
+                    // if it is an external uri
+                    else if($scope.section.path && _.isString($scope.section.path) && $scope.section.path.indexOf('http')>=0){
+                      $window.location.href =$scope.section.path;
                     }
                     else {
+                      // if internal to the SPA
+                      $location.url($scope.section.path);
                       return;
                     }
               };
 
               }
             };
-        });
+        }]);
 });
