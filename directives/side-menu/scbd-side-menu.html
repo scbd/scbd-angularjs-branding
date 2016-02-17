@@ -1,18 +1,19 @@
 
 
-<md-sidenav  ng-class="[side]" class="md-whiteframe-z2" md-component-id="expr" eval-attr-as-expr="mdComponentId" style="background-color:{{backGround}};color:{{color}}" >
+<md-sidenav  ng-class="[side]" class="md-whiteframe-z2" md-component-id="expr" eval-attr-as-expr="mdComponentId" md-is-locked-open="{{isOpen}}" style="background-color:{{backGround}};color:{{color}}" >
   <div>
-    <md-button class="md-icon-button " style="float:right;position:absolute;top:-5px;right:-7px;z-index:10;color:white;"  ng-click="close()" ng-if="side==='md-sidenav-left'">
+    <md-button class="md-icon-button " style="float:right;position:absolute;top:-5px;right:-7px;z-index:10;color:white;"  ng-if="!isOpen" ng-click="close()" ng-if="side==='md-sidenav-left'">
     <md-icon md-font-set="material-icons" md-ink-ripple="{{closeBtnColor}}" style="color:{{closeBtnColor}};" >arrow_back</md-icon>
     </md-button>
-    <md-button class="md-icon-button " style="float:right;position:absolute;top:-5px;z-index:10;color:white;"  ng-click="close()" ng-if="side==='md-sidenav-right'">
+    <md-button class="md-icon-button " style="float:right;position:absolute;top:-5px;z-index:10;color:white;" ng-if="!isOpen" ng-click="close()" ng-if="side==='md-sidenav-right'">
     <md-icon md-font-set="material-icons" md-ink-ripple="{{closeBtnColor}}" style="color:{{closeBtnColor}};" >arrow_forward</md-icon>
     </md-button>
     </div>
   <!-- <md-toolbar class="md-theme-indigo" style="background-color:#009b48;">
       <img src="/app/libs/scbd-branding/images/cbd-logo-white-en.svg" style="padding:3px 0 3px 0;" />
   </md-toolbar> -->
-  <md-content role="navigation" style="background-color:{{toggleBackGround}};color:{{toggleColor}};">
+  <md-content role="navigation" style="overflow:scroll;background-color:{{toggleBackGround}};color:{{toggleColor}};width:100%;"  >
+
     <ul class="side-menu">
       <li ng-repeat="section in sections" class="parent-list-item"
           ng-class="{'parentActive' : vm.isSectionSelected(section)}">
@@ -20,8 +21,8 @@
             id="heading_{{ section.name  }}">
           {{ section.name  }}
         </h2>
-        <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
-        <menu-toggle section="section" ng-if="section.type === 'toggle'" color="{{linkColor}}" back-ground="{{linkBackGround}}"></menu-toggle>
+        <menu-link section="section" ng-if="section.type === 'link'" color="{{linkColor}}" back-ground="{{linkBackGround}}"></menu-link>
+        <menu-toggle section="section" ng-if="section.type === 'toggle'" color="{{toggleColor}}" back-ground="{{toggleBackGround}}" children-back-ground="{{childrenBackGround}}" children-color="{{childrenColor}}"></menu-toggle>
       </li>
     </ul>
   </md-content>

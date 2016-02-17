@@ -33,6 +33,7 @@ function(app, template,_,angular) {
                   template: template,
                   scope: {
                        sections: '=',
+                       isOpen:'=',
                   },
                     transclude: true,
                   controller: ['$scope','$element','$mdSidenav', '$mdUtil','$mdMedia','$timeout','$log','$transclude','scbdMenuService',
@@ -62,11 +63,12 @@ function(app, template,_,angular) {
 
                   }],//controller
                   link: function($scope, $element, $attr) {
+
                       if($attr.color)
                         $scope.color=$attr.color;
                       else
                         $scope.color='#ffffff';
-
+console.log($attr.backGround);
                       if($attr.backGround)
                         $scope.backGround=$attr.backGround;
                       else
@@ -101,6 +103,21 @@ function(app, template,_,angular) {
                           $scope.side='md-sidenav-right';
                         else
                           $scope.side='md-sidenav-left';
+
+if($attr.childrenColor)
+$scope.childrenColor=$attr.childrenColor;
+else {
+  $scope.childrenColor='#000000';
+}
+if($attr.childrenBackGround)
+$scope.childrenBackGround=$attr.childrenBackGround;
+else {
+  $scope.childrenBackGround='#ffffff';
+}
+
+                          // if($attr.mDiSLockedOpen && $attr.mDiSLockedOpen==='gt-md')
+                          //   $scope.mDiSLockedOpen="true";
+                          //   $element.find('md-sidenav').attr('md-is-locked-open', 'true');
                       $scope.id=$attr.id;
                   }
         };//return

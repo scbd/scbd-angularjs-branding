@@ -9,7 +9,7 @@
 </md-button>
 <ul id="side-menu-{{section.name}}" class="menu-toggle-list" ng-show="section.open">
   <!-- ng-show="isOpen()" -->
-  <li ng-repeat="page in section.pages" style="color:{{color}};background-color:{{backGround}};">
+  <li ng-repeat="page in section.pages" style="color:{{childrenColor}};background-color:{{childrenBackGround}};">
     <menu-link section="page"></menu-link>
   </li>
 </ul>

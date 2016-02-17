@@ -8,31 +8,71 @@ define(['app'],function(app) {
       '$location','$timeout','$mdSidenav',
 
       function ($location,$timeout,$mdSidenav) {
+
         var dashboard= [];
         dashboard.push({
-          name: 'لعربية',
+          name: 'Dashboard',
           type: 'link',
-          mdIcon: 'language',
-          disabled:'true'
-        });
-        dashboard.push({
-          name: 'لعربية',
-          type: 'link',
-          mdIcon: 'language',
-          disabled:'true'
-        });
-        dashboard.push({
-          name: '中文',
-          type: 'link',
-          mdIcon: 'language',
-          disabled:'true'
-        });
-        dashboard.push({
-          name: 'English',
-          type: 'link',
-          mdIcon: 'language',
+          mdIcon: 'dashboard',
 
         });
+        dashboard.push({
+          name: 'Your Events',
+          type: 'link',
+          mdIcon: 'event',
+
+        });
+        dashboard.push({
+          name: 'Your Organizations',
+          type: 'link',
+          mdIcon: 'business',
+
+        });
+        dashboard.push({
+          name: 'heading',
+          type: 'heading',
+
+
+        });
+        dashboard.push({
+          name: 'Administration',
+          type: 'toggle',
+          mdIcon: 'supervisor_account',
+          pages: [
+
+            {
+              name: 'Events',
+              type: 'link',
+              state: 'https://www.cbd.int/convention/text/',
+              mdIcon: 'event',
+            },
+            {
+              name: 'Organizations',
+              type: 'link',
+              state: 'https://www.cbd.int/convention/text/',
+              mdIcon: 'business',
+            },
+            {
+            name: 'Meetings',
+            type: 'link',
+            state: 'https://www.cbd.int/convention/text/',
+            mdIcon: 'nature_people',
+
+          }, {
+            name: 'Plevra Configuration',
+            state: 'https://www.cbd.int/convention/parties/list/',
+            type: 'link',
+            imgSrc: '/app/images/cbd-leaf-green.svg',
+          },
+          {
+            name: 'User Management',
+            state: 'https://www.cbd.int/convention/parties/list/',
+            type: 'link',
+            faIcon: 'fa fa-users',
+            faIconSize: 'fa-lg',
+          }],
+        });
+
 
 
         var localeMenu= [];

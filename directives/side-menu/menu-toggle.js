@@ -33,6 +33,11 @@ function(app,template) {
           $scope.scbdMenuCtrl = scbdMenuCtrl;
           $scope.color=$attr.color;
           $scope.backGround=$attr.backGround;
+          if($attr.childrenColor)
+            $scope.childrenColor=$attr.childrenColor;
+            if($attr.childrenBackGround)
+              $scope.childrenBackGround=$attr.childrenBackGround;
+
       }
       };
     }]);
