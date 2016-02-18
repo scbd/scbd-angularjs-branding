@@ -14,19 +14,20 @@ define(['app'],function(app) {
           name: 'Dashboard',
           type: 'link',
           mdIcon: 'dashboard',
+          path: '/manage',
 
         });
         dashboard.push({
           name: 'Your Events',
           type: 'link',
           mdIcon: 'event',
-
+         path: '/manage/events',
         });
         dashboard.push({
           name: 'Your Organizations',
           type: 'link',
           mdIcon: 'business',
-
+          path: '/manage/organizations',
         });
         // dashboard.push({
         //   name: 'heading',
@@ -37,25 +38,25 @@ define(['app'],function(app) {
         dashboard.push({
           name: 'Administration',
           type: 'toggle',
+          open:1,
           mdIcon: 'supervisor_account',
           pages: [
-
             {
               name: 'Events',
               type: 'link',
-              state: 'https://www.cbd.int/convention/text/',
+              path: '/manage/events',
               mdIcon: 'event',
             },
             {
               name: 'Organizations',
               type: 'link',
-              state: 'https://www.cbd.int/convention/text/',
+              path: '/manage/organizations',
               mdIcon: 'business',
             },
             {
             name: 'Meetings',
             type: 'link',
-            state: 'https://www.cbd.int/convention/text/',
+            path: '/manage/meetings',
             mdIcon: 'nature_people',
 
           }, {
@@ -66,7 +67,7 @@ define(['app'],function(app) {
           },
           {
             name: 'User Management',
-            state: 'https://www.cbd.int/convention/parties/list/',
+            path: 'https://www.cbd.int/convention/parties/list/',
             type: 'link',
             faIcon: 'fa fa-users',
             faIconSize: 'fa-lg',

@@ -15,7 +15,8 @@ function(app,template) {
           //var controller = element.parent().controller();
 
 
-          $scope.section.open=false;
+
+
           $scope.isOpen = function () {
 
             return $scope.section.open;
