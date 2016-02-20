@@ -1,14 +1,16 @@
-<md-button class="md-button-toggle" ng-click="toggle()" aria-controls="side-menu-{{section.name}" layout="row" aria-expanded="section.open" >
+<div ng-click="toggle()" aria-expanded="section.open"  class="row">
   <!-- flex -->
-  <span aria-hidden="true" class="pull-right fa fa-plus md-toggle-icon"  ng-class="{'toggled' : isOpen()}"></span>
+
+
+  <!-- <span aria-hidden="true" class="pull-right fa fa-plus md-toggle-icon"  ng-class="{'toggled' : isOpen()}"></span> -->
   <i ng-class="['fa', section.faIcon, section.faIconSize]" ng-if="section.faIcon"></i>
   <i class="material-icons" ng-if="section.mdIcon" style="position:relative;top:5px;">{{section.mdIcon}}</i>
   <img ng-src="{{section.imgSrc}}" style="height:22px;" ng-if="section.imgSrc"></img>
   {{section.name}}
 
-</md-button>
-<ul id="side-menu-{{section.name}}" class="menu-toggle-list" ng-show="section.open">
-  <!-- ng-show="isOpen()" -->
+</div>
+<ul id="side-menu-{{section.name}}"  ng-if="section.open">
+  <!-- ng-show="isOpen()" class="menu-toggle-list"-->
   <li ng-repeat="page in section.pages" style="color:{{childrenColor}};background-color:{{childrenBackGround}};">
     <menu-link section="page"></menu-link>
   </li>

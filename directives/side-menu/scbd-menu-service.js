@@ -1,41 +1,53 @@
-define(['app'],function(app) {
+define(['app','lodash'],function(app,_) {
 
 
 'use strict';
 
 
   app.factory('scbdMenuService', [
-      '$location','$timeout','$mdSidenav',
+      '$location','$timeout','$q',
 
-      function ($location,$timeout,$mdSidenav) {
+      function ($location,$timeout,$q) {
+        var navRegistry={};
 
-        var dashboard= [];
-        dashboard.push({
+        var menus={};
+
+        menus.dashboard= [];
+        menus.dashboard.push({
+          type: 'config',
+          colorClass: 'dash-menu-color',
+          activeClass: 'dash-menu-active',
+          iconClass: 'pulse',
+          selfMenu:menus.dashboard,
+          childrenColorClass: 'dash-menu-children-color',
+          childrenActiveClass: 'dash-menu-children-active'
+        });
+        menus.dashboard.push({
           name: 'Dashboard',
           type: 'link',
           mdIcon: 'dashboard',
           path: '/manage',
 
         });
-        dashboard.push({
+        menus.dashboard.push({
           name: 'Your Events',
           type: 'link',
           mdIcon: 'event',
-         path: '/manage/events',
+          path: '#',
         });
-        dashboard.push({
+        menus.dashboard.push({
           name: 'Your Organizations',
           type: 'link',
           mdIcon: 'business',
-          path: '/manage/organizations',
+          path: '#',
         });
-        // dashboard.push({
+        // menus.dashboard.push({
         //   name: 'heading',
         //   type: 'heading',
         //
         //
         // });
-        dashboard.push({
+        menus.dashboard.push({
           name: 'Administration',
           type: 'toggle',
           open:1,
@@ -76,53 +88,53 @@ define(['app'],function(app) {
 
 
 
-        var localeMenu= [];
-        localeMenu.push({
+        menus.localeMenu= [];
+        menus.localeMenu.push({
           name: 'لعربية',
           type: 'link',
           mdIcon: 'language',
           disabled:'true'
         });
-        localeMenu.push({
+        menus.localeMenu.push({
           name: '中文',
           type: 'link',
           mdIcon: 'language',
           disabled:'true'
         });
-        localeMenu.push({
+        menus.localeMenu.push({
           name: 'English',
           type: 'link',
           mdIcon: 'language',
 
         });
-        localeMenu.push({
+        menus.localeMenu.push({
           name: 'Español',
           type: 'link',
           mdIcon: 'language',
           disabled:'true'
         });
-        localeMenu.push({
+        menus.localeMenu.push({
           name: 'Français',
           type: 'link',
           mdIcon: 'language',
           disabled:'true'
         });
-        localeMenu.push({
+        menus.localeMenu.push({
           name: 'Русский',
           type: 'link',
           mdIcon: 'language',
           disabled:'true'
         });
 
-        var accMenu= [];
-        accMenu.push({
+        menus.accMenu= [];
+        menus.accMenu.push({
           name: 'Your Profile',
           type: 'link',
           mdIcon: 'person',
           state:'https://accounts.cbd.int/profile'
         });
 
-        accMenu.push({
+        menus.accMenu.push({
           name: 'Roles',
           type: 'toggle',
           faIcon: 'fa fa-users',
@@ -140,14 +152,14 @@ define(['app'],function(app) {
             mdIcon: 'nature_people',
           }
         ]});
-        accMenu.push({
+        menus.accMenu.push({
           name: 'Password',
           type: 'link',
           faIcon: 'fa fa-key',
           faIconSize: 'fa-lg',
           state:'https://accounts.cbd.int/password'
         });
-        accMenu.push({
+        menus.accMenu.push({
           name: 'Sign-out',
           type: 'link',
           faIcon: 'fa fa-sign-out',
@@ -155,9 +167,9 @@ define(['app'],function(app) {
           //state:'signOut'
         });
 
-        var cbdMenu= [];
+        menus.cbdMenu= [];
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'The Convention',
           type: 'toggle',
           imgSrc: '/app/images/cbd-leaf-white.svg',
@@ -195,7 +207,7 @@ define(['app'],function(app) {
         ]});
 
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'Cartagena Protocol',
           type: 'toggle',
           faIcon: 'fa-heartbeat',
@@ -228,7 +240,7 @@ define(['app'],function(app) {
         });
 
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'Nagoya Protocol',
           type: 'toggle',
           faIcon: 'fa-share-alt-square',
@@ -254,7 +266,7 @@ define(['app'],function(app) {
           ]
         });
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'Programmes',
           type: 'toggle',
           faIcon: 'fa-tasks',
@@ -279,7 +291,7 @@ define(['app'],function(app) {
           ]
         });
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'Information',
           type: 'toggle',
           mdIcon: 'info_outline',
@@ -313,7 +325,7 @@ define(['app'],function(app) {
         });
 
 
-        cbdMenu.push({
+        menus.cbdMenu.push({
           name: 'Secretariat',
           type: 'toggle',
           mdIcon: 'gavel',
@@ -346,21 +358,46 @@ define(['app'],function(app) {
             }
           ]
         });
-        //============================================================
+//link config options
+
+    _.each(menus,function(menu){
+        var config= _.findWhere(menu,{'type':'config'});
+      _.each(menu,function(menuItem){
+              if(menuItem.type==='config')return;
+
+              if(menuItem.type==='toggle'){
+                menuItem.config=config;
+                _.each(menuItem.pages,function(page){
+                    page.config=config;
+                    page.isChild=true;
+                });
+              }
+              else {
+                menuItem.config=config;
+              }
+      });
+
+
+        });
+        //=======================================================================
         //
-        //
-        //============================================================
-        // function sortByHumanName(a, b) {
-        //   return (a.humanName < b.humanName) ? -1 :
-        //     (a.humanName > b.humanName) ? 1 : 0;
-        // }
+        //=======================================================================
+        function registerNavInstance(navId,navCtrl) {
+
+          if (navId) {
+            if(navRegistry[navId])
+              navRegistry[navId]={};
+            navRegistry[navId] = navCtrl;
+          } else
+            throw "Error: thrying to register a nav controler in the scbd-menuservice with out a navId";
+        }
 
         //============================================================
         //
         //
         //============================================================
         function isOpenRight(navId){
-          return $mdSidenav(navId).isOpen();
+        //  return $mdSidenav(navId).isOpen();
         }
 
         //============================================================
@@ -384,36 +421,104 @@ define(['app'],function(app) {
         //
         //
         //============================================================
+        function toggle(navId) {
+              whenNavCtrlLoaded(navId).then(navRegistry[navId].toggle());
+        }
+        //=======================================================================
+        //
+        //=======================================================================
+        function whenNavCtrlLoaded(navId) {
+          var deferred = $q.defer();
+          deferred.resolved = 0;
+
+          var cancelId = setInterval(function() {
+            if (navRegistry[navId]) {
+
+              deferred.resolve(navRegistry[navId]);
+              deferred.resolved = 1;
+              clearInterval(cancelId);
+              return deferred.promise;
+            }
+          }, 100);
+          setTimeout(function() {
+            if (!deferred.resolved) {
+              deferred.reject('Nav Controler is not loaded within 5 seconds.');
+              clearInterval(cancelId);
+            }
+          }, 5000);
+          return deferred.promise;
+        }
+        //============================================================
+        //
+        //
+        //============================================================
         function buildDelayedToggler(navID,scope) {
 
-          return debounce(function() {
-            $mdSidenav(navID)
-              .toggle();
-          }, 200,scope);
+          // return debounce(function() {
+          //   $mdSidenav(navID)
+          //     .toggle();
+          // }, 200,scope);
         }
         //============================================================
         //
         //
         //============================================================
         function close(navID) {
-            $mdSidenav(navID).toggle(false);
+            // $mdSidenav(navID).toggle(false);
           }
           //============================================================
           //
           //
           //============================================================
           function open(navID) {
-              $mdSidenav(navID).toggle(true);
+              // $mdSidenav(navID).toggle(true);
             }
+
+          //============================================================
+          //
+          //============================================================
+          function closeAll() {
+                _.each(navRegistry,function(navCtrl){
+                    navCtrl.close();
+                });
+          }
+          //============================================================
+          //
+          //============================================================
+          function closeAllActive(menu) {
+                _.each(menu,function(item){
+                  if(item.type==='link'){
+                      if(item.self && item.active)
+                        item.self.deactivate();
+
+                      if(item.active)
+                        item.active=false;
+                  } else if(item.type==='toggle'){
+                    if(item.pages){
+                        _.each(item.pages,function(){
+                          if(item.self && item.active)
+                            item.self.deactivate();
+
+                          if(item.active)
+                            item.active=false;
+                        });
+                    }
+                  }//
+
+                });
+          }//closeAllActive
+
           return  {
+            closeAllActive:closeAllActive,
+            registerNavInstance:registerNavInstance,
             isOpen:isOpenRight,
-            toggle: buildDelayedToggler,
+            toggle: toggle,
             close: close,
             open: open,
-            cbdMenu:cbdMenu,
-            accMenu:accMenu,
-            localeMenu:localeMenu,
-            dashboard:dashboard
+            cbdMenu:menus.cbdMenu,
+            accMenu:menus.accMenu,
+            localeMenu:menus.localeMenu,
+            dashboard:menus.dashboard
           };
 
       }]);

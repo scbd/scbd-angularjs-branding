@@ -2,7 +2,7 @@
 define(['app',
  'text!./header.html',
   'jquery',
-  'css!/app/libs/scbd-branding/css/colors',
+  'css!/app/libs/scbd-branding/css/main',
   'css!./header',
   'scbd-angularjs-services/authentication',
   './account',
@@ -22,8 +22,8 @@ function(app, template, $) {
                   scope: {
                        portalName: '@',
                   },
-                  controller: ['$scope','$element', '$attrs','$window', '$location','authentication','$mdSidenav', '$mdUtil','$mdMedia','$timeout','$log','scbdMenuService',
-                  function($scope, $element, $attrs,$window, $location,authentication,$mdSidenav, $mdUtil,$mdMedia,$timeout,$log,scbdMenuService) {
+                  controller: ['$scope','$element', '$attrs','$window', '$location','authentication','$timeout','$log','scbdMenuService',
+                  function($scope, $element, $attrs,$window, $location,authentication,$timeout,$log,scbdMenuService) {
                       if (window.innerWidth <= 600)
                         $scope.isXS = true;
                       authentication.getUser().then(function(u){
@@ -36,9 +36,9 @@ function(app, template, $) {
                       $scope.cbdMenu=scbdMenuService.cbdMenu;
                       $scope.accMenu=scbdMenuService.accMenu;
                       $scope.localeMenu=scbdMenuService.localeMenu;
-                      $scope.toggleCbdMenu=scbdMenuService.toggle('cbd-menu',$scope);
-                      $scope.toggleNotMenu=scbdMenuService.toggle('notifications-menu',$scope);
-                      $scope.toggleLocaleMenu=scbdMenuService.toggle('locale-menu',$scope);
+                      // $scope.toggleCbdMenu=scbdMenuService.toggle('cbd-menu',$scope);
+                      // $scope.toggleNotMenu=scbdMenuService.toggle('notifications-menu',$scope);
+                      // $scope.toggleLocaleMenu=scbdMenuService.toggle('locale-menu',$scope);
                       // //============================================================
                       // //
                       // //

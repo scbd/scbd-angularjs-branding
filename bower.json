@@ -11,15 +11,12 @@
   "dependencies": {
     "angular"                     : "1.4.8",
     "angular-animate"             : "1.4.8",
-    "angular-material"            : "https://github.com/angular/material.git#5bb4fffbe39ba15ec456bd411c132862764dada1",
     "bootstrap"                   : "3.3.6",
     "font-awesome"                : "4.5.0",
     "ionsound"                    : "3.0.0",
     "jquery"                      : "2.2.0",
     "lodash"                      : "3.9.3",
-    "moment"                      : "2.11.1",
-    "scbd-angularjs-services"     : "1.1.0"
-
+    "scbd-angularjs-services"     : "~1.*"
   },
   "license": "MIT",
   "private": false,

@@ -41,7 +41,7 @@ function(app, template,_) {
 
 
 
-                    $scope.toggleAccountMenu=scbdMenuService.toggle('account-menu',$scope);
+// $scope.toggleAccountMenu=scbdMenuService.toggle('account-menu',$scope);
 
 
 
