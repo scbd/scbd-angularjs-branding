@@ -1,12 +1,121 @@
+.md-badge {
+  position: relative;
+  white-space: nowrap;
+  margin-right: 24px; }
+  .md-badge:not([data-badge]) {
+    margin-right: auto; }
+  .md-badge[data-badge]:after {
+    content: attr(data-badge);
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+            align-content: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: absolute;
+    top: -11px;
+    right: -24px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgb(217, 83, 79);
+    color: rgb(255,255,255); }
+    .md-button .md-badge[data-badge]:after {
+      top: -10px;
+      right: -5px; }
+  .md-badge.md-badge--no-background[data-badge]:after {
+    color: rgb(255,64,129);
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 0 1px gray; }
+  .md-badge.md-badge--overlap {
+    margin-right: 3px; }
+    .md-badge.md-badge--overlap:after {
+      right: -3px;top:-4px; }
+
+      .fa-badge {
+        position: relative;
+        white-space: nowrap;
+        margin-right: 24px; }
+        .fa-badge:not([data-badge]) {
+          margin-right: auto; }
+        .fa-badge[data-badge]:after {
+          content: attr(data-badge);
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-flex-wrap: wrap;
+              -ms-flex-wrap: wrap;
+                  flex-wrap: wrap;
+          -webkit-justify-content: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-align-content: center;
+              -ms-flex-line-pack: center;
+                  align-content: center;
+          -webkit-align-items: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          position: absolute;
+          top: -11px;
+          right: -24px;
+          font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+          font-weight: 600;
+          font-size: 9px;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: rgb(217, 83, 79);
+          color: rgb(255,255,255); }
+          .fa-button .fa-badge[data-badge]:after {
+            top: -10px;
+            right: -5px; }
+        .fa-badge.fa-badge--no-background[data-badge]:after {
+          color: rgb(255,64,129);
+          background: rgba(255,255,255,0.2);
+          box-shadow: 0 0 1px gray; }
+        .fa-badge.fa-badge--overlap {
+          margin-right: 3px; }
+          .fa-badge.fa-badge--overlap:after {
+            right: -7px;top:-8px; }
 
 .btn-icon i{
   display: inline-block;
   text-align: center;
   color: inherit;
   line-height: 37px;
-
+  width:37px;
+  heigth:37px;
+  cursor: pointer;;
+  font-size: 25px;
 }
-
+.btn-icon{
+  display: inline-block;
+  text-align: center;
+  color: inherit;
+  line-height: 37px;
+  width:37px;
+  heigth:37px;
+  cursor: pointer;
+  font-size: 25px;
+}
 /*-- credit to:*/
 /*!
  * font-awesome-animation - v0.0.8

@@ -10,8 +10,9 @@ function(app,template) {
             section: '='
           },
           template: template,
-          require: '^menuToggle',
+          require: ['^scbdSideMenu','^menuToggle'],
           controller: ['$scope','$element',function ($scope,$element) {
+            $scope.iconToggle={};
               // set initial style for link Item
               $element.find('button').addClass($scope.section.config.colorClass);
 
@@ -19,13 +20,17 @@ function(app,template) {
                 return $scope.section.open;
               };
               $scope.toggle = function () {
+
                   $scope.scbdMenuCtrl.closeAllToggles($scope.section.name);
                   $scope.section.open=!$scope.section.open;
+
               };
 
           }],//cotrroller
-          link: function($scope, $element, $attr, menuToggleCtrl) {
-                $scope.section.self=menuToggleCtrl;
+          link: function($scope, $element, $attr, ctrls) {
+
+                $scope.scbdMenuCtrl=ctrls[0];
+                $scope.section.self=ctrls[1];
           }//link
       };//return
     }]);//directive

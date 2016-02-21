@@ -1,22 +1,29 @@
-<div class="header bg-white" >
-  <!-- sign in -->
-  <accounts-validation-header ></accounts-validation-header>
-  <div id="portal-mobi-header"  class="  navbar-cbd bg-white "  hide-gt-sm>
-        <span  style="padding: 2px 0 0 2px;">
-          <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
-          <span class="brand"> {{portalName}}</span>
-        </span>
-  </div>
-  <div  class="  navbar-cbd bg-white "  hide-gt-sm>
-        <span  style="padding: 2px 0 0 2px;">
-          <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
-          <span class="brand"> {{portalName}}</span>
-        </span>
-  </div>
+
+<!-- <div  class="  navbar-cbd bg-white "  hide-gt-sm>
+      <span  style="padding: 2px 0 0 2px;">
+        <img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" />
+        <span class="brand"> {{portalName}}</span>
+      </span>
+</div> -->
+<div class="header">
+
+<span ng-click="toggleCbdMenu()"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
+   <account-icon user="user" ></account-header>
+
+  <xuser-notifications-icon  ></xuser-notifications-icon>
+  <!--
+  <locale-header style="position:absolute;right:10px;top:-1px;" ></locale-header> -->
+
+</div>
+
+<login-account user="user" ></login-account>
+
+
+<!-- <div class="header bg-white" >
 
   <nav  class=" navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" hide-xs>
     <div class="container-fluid container-cbd bg-white">
-      <!-- Brand and toggle get grouped for better mobile display -->
+
             <div class="navbar-header ">
               <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleCbdMenu()"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span>
 
@@ -31,7 +38,7 @@
             </div>
 
     </div>
-</div>
+</div> -->
 <!-- if IE9 -->
   <!-- <nav  class=" navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop" hide-xs>
     <div class="container-fluid container-cbd bg-white">
@@ -59,7 +66,7 @@
             </ul>
     </div>
   </nav> -->
-    <login-account user="user" ></login-account>
+    <!-- <login-account user="user" ></login-account> -->
   <!-- <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

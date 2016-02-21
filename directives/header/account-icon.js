@@ -1,11 +1,11 @@
 define(['app',
-  'text!./account.html',
+  'text!./account-icon.html',
   'lodash',
-  'css!./account',
+  'css!./account-icon',
   'scbd-angularjs-services/authentication',
 ],
 function(app, template,_) {
-     app.directive('accountHeader', function() { // parent directive header
+     app.directive('accountIcon', function() { // parent directive header
 
          return { restrict: 'E' ,
                   priority: 0, //child of headder

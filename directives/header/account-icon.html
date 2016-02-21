@@ -1,0 +1,25 @@
+<div ng-if="user">
+
+  <a ng-if="!user.isAuthenticated" href="#"  data-slug="signin" data-toggle="modal" data-target="#loginDialog"><i  class="fa fa-power-off"></i> <strong>SIGN IN </strong></a>
+
+  <a ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
+    <span class="text-nowrap color-cbdlitegrey"><i class="fa fa-chevron-down"></i> {{user.name}}</span>
+  </a>
+  <a ng-if="user.isAuthenticated" class="hidden-md hidden-lg" href="#" data-toggle="dropdown" id="dropdownMenu1">
+    <span class="hidden-md hidden-lg color-cbdlitegrey user-logged-in">
+
+      <span class="fa-stack fa-1x">
+        <i class="fa fa-circle-o-notch fa-stack-2x" style="font-weight:normal;"></i>
+        <i class="fa fa-user fa-stack-1x fa-fix"></i>
+
+      </span>
+    </span>
+  </a>
+
+</div>
+
+<!--
+<div ng-if="user" hide-gt-xs>
+  <md-icon ng-if="!user.isAuthenticated" md-font-set="material-icons color-white" style="padding-left:15px;margin: 0 0 0 0;" data-slug="signin" data-toggle="modal" data-target="#loginDialog">person</md-icon>
+  <md-icon ng-if="user.isAuthenticated" md-font-set="material-icons color-white" style="padding-left:15px;margin: 0 0 3px 0;" ng-click="toggleAccountMenu()">person</md-icon>
+</div> -->
