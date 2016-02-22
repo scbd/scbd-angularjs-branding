@@ -1,19 +1,18 @@
-<div   ng-cloak >
-  <!-- ng-if="user && user.isAuthenticated" -->
-xxx
+<li class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
 
-  <!-- <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn " > -->
-      <span ng-if="(notifications|filter:isUnread).length > 0 " >
-          <scbd-icon-button type="fa" icon-name="fa-bell" data-badge=""></scbd-icon-button>
-          <!-- <i class="fa fa-bell color-cbdlitegrey"></i>
-          <span class="label label-danger">{{(notifications|filter:isUnread).length}}</span> -->
-      </span>
-      <span ng-if="(notifications|filter:isUnread).length <= 0">
-          <scbd-icon-button type="fa" icon-name="fa-bell-o" waves></scbd-icon-button>
-      </span>
-  <!-- </a> -->
 
-  <!-- <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel">
+  <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn" >
+    <span ng-if="(notifications|filter:isUnread).length > 0 " >
+        <scbd-icon-button type="fa" icon-name="fa-bell" data-badge="{{(notifications|filter:isUnread).length}}"></scbd-icon-button>
+
+    </span>
+    <span ng-if="(notifications|filter:isUnread).length <= 0">
+        <scbd-icon-button type="fa" icon-name="fa-bell-o" waves></scbd-icon-button>
+    </span>
+
+  </a>
+
+  <div class="dropdown-menu hidden-xs " role="menu" aria-labelledby="dLabel">
     <div class="panel n-drop-down" style="width:500px;padding:0;margin:0;z-index:1100;">
       <div class="panel-body">
         <div xuser-notifications hide-close-button="true"></div>
@@ -24,5 +23,5 @@ xxx
         </a>
       </div>
     </div>
-  </div> -->
-</div>
+  </div>
+</li>

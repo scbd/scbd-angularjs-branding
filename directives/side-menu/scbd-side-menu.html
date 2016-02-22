@@ -1,5 +1,6 @@
 <div class="site-overlay" ng-click="toggle()"></div>
-<nav class="pushy pushy-left">
+<nav class="pushy" >
+  <!-- ng-show="isOpen" -->
   <section></section>
   <div ng-repeat="section in sections" ng-class="{'parentActive' : vm.isSectionSelected(section)}">
     <h2 ng-if="section.type === 'heading'" id="heading_{{section.name }}">

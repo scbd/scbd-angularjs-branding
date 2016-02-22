@@ -15,6 +15,7 @@ define(['app','lodash'],function(app,_) {
         menus.dashboard= [];
         menus.dashboard.push({
           type: 'config',
+          menuClass:'dash-menu',
           colorClass: 'dash-menu-color',
           activeClass: 'dash-menu-active',
           iconClass: 'pulse',
@@ -90,6 +91,16 @@ define(['app','lodash'],function(app,_) {
 
         menus.localeMenu= [];
         menus.localeMenu.push({
+          type: 'config',
+          menuClass:'cbd-menu',
+          colorClass: 'cbd-menu-color',
+          activeClass: 'cbd-menu-active',
+          iconClass: 'pulse',
+          selfMenu:menus.localeMenu,
+          childrenColorClass: 'cbd-menu-children-color',
+          childrenActiveClass: 'cbd-menu-children-active'
+        });
+        menus.localeMenu.push({
           name: 'لعربية',
           type: 'link',
           mdIcon: 'language',
@@ -127,6 +138,16 @@ define(['app','lodash'],function(app,_) {
         });
 
         menus.accMenu= [];
+        menus.accMenu.push({
+          type: 'config',
+          menuClass:'cbd-menu',
+          colorClass: 'cbd-menu-color',
+          activeClass: 'cbd-menu-active',
+          iconClass: 'pulse',
+          selfMenu:menus.accMenu,
+          childrenColorClass: 'cbd-menu-children-color',
+          childrenActiveClass: 'cbd-menu-children-active'
+        });
         menus.accMenu.push({
           name: 'Your Profile',
           type: 'link',
@@ -168,7 +189,16 @@ define(['app','lodash'],function(app,_) {
         });
 
         menus.cbdMenu= [];
-
+        menus.cbdMenu.push({
+          type: 'config',
+          menuClass:'cbd-menu',
+          colorClass: 'cbd-menu-color',
+          activeClass: 'cbd-menu-active',
+          iconClass: 'pulse',
+          selfMenu:menus.cbdMenu,
+          childrenColorClass: 'cbd-menu-children-color',
+          childrenActiveClass: 'cbd-menu-children-active'
+        });
         menus.cbdMenu.push({
           name: 'The Convention',
           type: 'toggle',
@@ -392,30 +422,30 @@ define(['app','lodash'],function(app,_) {
             throw "Error: thrying to register a nav controler in the scbd-menuservice with out a navId";
         }
 
-        //============================================================
+        // //============================================================
+        // //
+        // //
+        // //============================================================
+        // function isOpenRight(navId){
+        // //  return $mdSidenav(navId).isOpen();
+        // }
         //
-        //
-        //============================================================
-        function isOpenRight(navId){
-        //  return $mdSidenav(navId).isOpen();
-        }
-
-        //============================================================
-        //
-        //
-        //============================================================
-        function debounce(func, wait, context) {
-          var timer;
-          return function debounced() {
-            //var context = $scope,
-            var    args = Array.prototype.slice.call(arguments);
-            $timeout.cancel(timer);
-            timer = $timeout(function() {
-              timer = undefined;
-              func.apply(context, args);
-            }, wait || 10);
-          };
-        }
+        // //============================================================
+        // //
+        // //
+        // //============================================================
+        // function debounce(func, wait, context) {
+        //   var timer;
+        //   return function debounced() {
+        //     //var context = $scope,
+        //     var    args = Array.prototype.slice.call(arguments);
+        //     $timeout.cancel(timer);
+        //     timer = $timeout(function() {
+        //       timer = undefined;
+        //       func.apply(context, args);
+        //     }, wait || 10);
+        //   };
+        // }
 
         //============================================================
         //
@@ -433,7 +463,7 @@ define(['app','lodash'],function(app,_) {
 
           var cancelId = setInterval(function() {
             if (navRegistry[navId]) {
-
+console.log('navRegistry',navRegistry);
               deferred.resolve(navRegistry[navId]);
               deferred.resolved = 1;
               clearInterval(cancelId);
@@ -448,31 +478,31 @@ define(['app','lodash'],function(app,_) {
           }, 5000);
           return deferred.promise;
         }
-        //============================================================
+        // //============================================================
+        // //
+        // //
+        // //============================================================
+        // function buildDelayedToggler(navID,scope) {
         //
-        //
-        //============================================================
-        function buildDelayedToggler(navID,scope) {
-
-          // return debounce(function() {
-          //   $mdSidenav(navID)
-          //     .toggle();
-          // }, 200,scope);
-        }
-        //============================================================
-        //
-        //
-        //============================================================
-        function close(navID) {
-            // $mdSidenav(navID).toggle(false);
-          }
-          //============================================================
-          //
-          //
-          //============================================================
-          function open(navID) {
-              // $mdSidenav(navID).toggle(true);
-            }
+        //   // return debounce(function() {
+        //   //   $mdSidenav(navID)
+        //   //     .toggle();
+        //   // }, 200,scope);
+        // }
+        // //============================================================
+        // //
+        // //
+        // //============================================================
+        // function close(navID) {
+        //     // $mdSidenav(navID).toggle(false);
+        //   }
+        //   //============================================================
+        //   //
+        //   //
+        //   //============================================================
+        //   function open(navID) {
+        //       // $mdSidenav(navID).toggle(true);
+        //     }
 
           //============================================================
           //
@@ -507,11 +537,36 @@ define(['app','lodash'],function(app,_) {
 
                 });
           }//closeAllActive
+          function cssTransforms3d(){
+          		var el = document.createElement('p'),
+          		supported = false,
+          		transforms = {
+          		    'webkitTransform':'-webkit-transform',
+          		    'OTransform':'-o-transform',
+          		    'msTransform':'-ms-transform',
+          		    'MozTransform':'-moz-transform',
+          		    'transform':'transform'
+          		};
 
+          		// Add it to the body to get the computed style
+          		document.body.insertBefore(el, null);
+
+          		for(var t in transforms){
+          		    if( el.style[t] !== undefined ){
+          		        el.style[t] = 'translate3d(1px,1px,1px)';
+          		        supported = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+          		    }
+          		}
+
+          		document.body.removeChild(el);
+
+          		return (supported !== undefined && supported.length > 0 && supported !== "none");
+            }
           return  {
+            cssTransforms3d:cssTransforms3d,
             closeAllActive:closeAllActive,
             registerNavInstance:registerNavInstance,
-            isOpen:isOpenRight,
+            // isOpen:isOpenRight,
             toggle: toggle,
             close: close,
             open: open,

@@ -1,0 +1,24 @@
+.login h1 {
+  text-rendering: optimizeLegibility;
+  font-size: 36px;
+  font-weight: 200;
+}
+.login a {
+  color: white;
+}
+.modal {
+  width: 250;
+}
+.modal-body {
+  color: white;
+  background-color: #009b48;
+}
+.dropshadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 400px;
+    margin: 30px auto;
+  }
+}

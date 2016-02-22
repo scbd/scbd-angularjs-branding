@@ -6,7 +6,6 @@ function(app,template) {
             restrict: 'E',
             replace: true,
             template: template,
-
             controller: ['$scope',  'IUserNotifications', 'cfgUserNotification',
                 function($scope,  userNotifications, cfgUserNotification) {
                     $scope.userNotifications=userNotifications;
@@ -14,7 +13,7 @@ function(app,template) {
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
-
+console.log('in not icon');
                     $scope.viewAllUrl = cfgUserNotification.notificationUrls.viewAllNotificationUrl;
                 }]};
     });

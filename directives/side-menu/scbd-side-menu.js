@@ -4,7 +4,8 @@ define(['app',
     'css!./scbd-side-menu',
     './menu-toggle',
     './menu-link',
-    './scbd-menu-service'
+    './scbd-menu-service',
+    '../scbd-icon-button'
   ],
   function(app, template, _) {
     //============================================================
@@ -18,7 +19,7 @@ define(['app',
         template: template,
         scope: {
           sections: '=',
-          isOpen: '=',
+
         },
         require:'^scbdSideMenu',
         transclude: true,
@@ -28,80 +29,38 @@ define(['app',
         //============================================================
         link: function($scope, $element, $attr,scbdSideMenu) {
 
-          if($attr.fullScreen){
-              $scope.fullScreen = $attr.fullScreen;
-              $element.find('.pushy').css('position','absolute');
-            }
-
-
-
-          if ($attr.color){
-            $scope.color = $attr.color;
-            $element.find('.pushy').css('color',$attr.color);
-          }
-          else{
-            $scope.color = '#ffffff';
-            $element.find('.pushy').css('color',$attr.color);
+          $scope.isOpen=false;
+          if($attr.hasOwnProperty('fullScreenHeight')){
+              $scope.fullScreenHeight = true;
+              $element.find('.pushy').css('z-index','999');
+          }else{
+            $element.find('.pushy').css('z-index','500');
           }
 
-          if ($attr.backGround){
-            $scope.backGround = $attr.backGround;
-            $element.find('.pushy').css('background-color',$attr.backGround);
-          }
-          else{
-            $scope.backGround = '#009b48';
-            $element.find('.pushy').css('background-color',$attr.backGround);
-          }
+          if($attr.bumpId)
+            $scope.bumpId=$attr.bumpId;
 
-          if ($attr.toggleColor)
-            $scope.toggleColor = $attr.toggleColor;
+          if($attr.hasOwnProperty('overlay'))
+              $scope.overlay = true;
+
+          if($attr.hasOwnProperty('open'))
+              $scope.open=true;
+
+          if($attr.hasOwnProperty('rightSide'))
+            $scope.isRight=true;
           else
-            $scope.toggleColor = '#ffffff';
+            $scope.isRight=false;
 
-          if ($attr.toggleBackGround)
-            $scope.toggleBackGround = $attr.toggleBackGround;
-          else
-            $scope.toggleBackGround = '#009b48';
+          $scope.navId=$attr.id;
 
-          if ($attr.linkColor)
-            $scope.linkColor = $attr.linkColor;
-          else
-            $scope.linkColor = '#323232';
 
-          if ($attr.linkBackGround)
-            $scope.linkBackGround = $attr.linkBackGround;
-          else
-            $scope.linkBackGround = '#ffffff';
+          $element.find('.site-overlay').attr('id','site-overlay-'+$attr.id);
 
-          if ($attr.closeBtnColor)
-            $scope.closeBtnColor = $attr.closeBtnColor;
-          else
-            $scope.closeBtnColor = '#ffffff';
 
-          if ($attr.side && $attr.side === 'right')
-            $scope.side = 'md-sidenav-right';
-          else
-            $scope.side = 'md-sidenav-left';
+          scbdSideMenu.init($attr.id,scbdSideMenu);
 
-          if ($attr.childrenColor)
-            $scope.childrenColor = $attr.childrenColor;
-          else {
-            $scope.childrenColor = '#000000';
-          }
-          if ($attr.childrenBackGround)
-            $scope.childrenBackGround = $attr.childrenBackGround;
-          else {
-            $scope.childrenBackGround = '#ffffff';
-          }
 
-          // if($attr.mDiSLockedOpen && $attr.mDiSLockedOpen==='gt-md')
-          //   $scope.mDiSLockedOpen="true";
-          //   $element.find('md-sidenav').attr('md-is-locked-open', 'true');
 
-          if($attr.id){
-            scbdMenuService.registerNavInstance($attr.id,scbdSideMenu);
-            $scope.id = $attr.id;
-          }
         },
 
 
@@ -111,19 +70,24 @@ define(['app',
 
         controller: ['$scope', '$element',  '$timeout', '$log', '$transclude','$window',
           function($scope, $element, $timeout, $log, $transclude,$window) {
-console.log($scope.sections);
-            var pushy = $element.find('.pushy'), //menu css class
-            		body = angular.element($document[0].body),
-            		container = angular.element($document[0].body).find('#getBumped'), //container css class
+                var pushy = $element.find('.pushy');
+                $scope.isOpen=false;
+
+                var
+
+            		container = angular.element($document[0].body).find('#'+$scope.bumpId), //container css class
             		push = $element.find('.push'), //css class to add pushy capability
-            		siteOverlay = $element.find('.site-overlay'), //site overlay
-            		pushyClass = "pushy-left pushy-open", //menu position & menu open class
+            		// siteOverlay = $element.find('.site-overlay'), //site overlay
+                // pushyClass = "pushy-left pushy-open", //menu position & menu open class
+            		pushyClassLeft = "pushy-left pushy-open", //menu position & menu open class
+            		pushyClassRight = "pushy-right pushy-open", //menu position & menu open class
             		pushyActiveClass = "pushy-active", //css class to toggle site overlay
-            		containerClass = "container-push", //container open class
-            		pushClass = "push-push", //css class to add pushy capability
-            		menuBtn = $('.menu-btn, .pushy a'), //css classes to toggle the menu
+            		// containerClass = "container-push", //container open class
+            		// pushClass = "push-push", //css class to add pushy capability
+            		// menuBtn = $('.menu-btn, .pushy a'), //css classes to toggle the menu
             		menuSpeed = 200, //jQuery fallback menu speed
-            		menuWidth = pushy.width() + "px"; //jQuery fallback menu width
+                containerWidth;
+            		//menuWidth = pushy.width() + "px"; //jQuery fallback menu width
 
             //============================================================
             //  inseart transclude header
@@ -132,47 +96,151 @@ console.log($scope.sections);
               $scope.close = function() {
               scbdMenuService.close($scope.id);
             };
+//             function getStyleSheet(unique_title) {
+//               for(var i=0; i<$document[0].styleSheets.length; i++) {
+//                 var sheet = $document[0].styleSheets[i];
+// console.log(sheet);
+//                 if(sheet.title == unique_title) {
+//                   return sheet;
+//                 }
+//               }
+//             }
+          function init(navId,scbdSideMenu){
 
-//pushy.css('right',0);
-// container.toggleClass(containerClass);
+                scbdMenuService.registerNavInstance(navId,scbdSideMenu);
 
-pushy.toggleClass(pushyClass);
-pushContainerRight();
+                console.log('$scope.fullScreenHeight',$scope.fullScreenHeight);
+                if($scope.fullScreenHeight)
+                  pushy.css('position','fixed');
+
+                if($scope.isRight){
+
+                    pushy.toggleClass('pushy-right'); // if left must do this first
+                    pushy.addClass('p-right');
+                  }
+                else
+                    pushy.toggleClass('pushy-left'); // if left must do this first
+
+                pushy.addClass($scope.sections[0].menuClass);
+                //
+                if($scope.open)
+                    setTimeout(function(){togglePushy();},500);
+
+          }
+
+
 
             //============================================================
             //  toggle
             //============================================================
             function togglePushy(){
 
-          		body.toggleClass(pushyActiveClass); //toggle site overlay
-          		pushy.toggleClass(pushyClass);
-          		container.toggleClass(containerClass);
-          		push.toggleClass(pushClass); //css class to add pushy capability
+              if($scope.isRight){
+
+                if($scope.isOpen)
+                  closePushyRight();
+                else
+                  openPushyRight();
+              }
+              else{ // is left side
+                if($scope.isOpen)
+                  closePushyLeft();
+                else
+                  openPushyLeft();
+
+              }
+              if($scope.overlay)
+                $element.toggleClass(pushyActiveClass);
+
+
+
           	}
 
+
+            function openPushyRight(){
+                pushy.toggleClass(pushyClassRight);
+                pushContainerLeft();
+                $scope.isOpen=true;
+            }
+
+            function openPushyLeft(){
+                pushy.toggleClass(pushyClassLeft);
+                pushContainerRight();
+                $scope.isOpen=true;
+            }
+            function closePushyRight(){
+
+                pushy.toggleClass(pushyClassRight);
+                resetContainer();
+                $scope.isOpen=false;
+            }
+            function closePushyLeft(){
+                pushy.toggleClass(pushyClassLeft);
+                resetContainer();
+                $scope.isOpen=false;
+            }
             //============================================================
             //  toggle
             //============================================================
             function pushContainerRight(){
+              if(!$scope.bumpId)return;
+              container = angular.element($document[0].body).find('#'+$scope.bumpId);
           		container.css('-webkit-transform','translate3d(240px,0,0)');
             	container.css('-moz-transform','translate3d(240px,0,0)');
               container.css('-ms-transform','translate3d(240px,0,0)');
               container.css('-o-transform','translate3d(240px,0,0)');
               container.css('transform','translate3d(240px,0,0)');
+
+
+              containerWidth = container.css('width');
+              if(!screen.width){
+
+                container.css('width',String(($window.innerWidth-278))+'px');
+              }
+              else{
+                container.css('width',String((screen.width-278))+'px');
+              }
+
+
+          	}
+            //============================================================
+            //  toggle
+            //============================================================
+            function pushContainerLeft(){
+              if(!$scope.bumpId)return;
+              container = angular.element($document[0].body).find('#'+$scope.bumpId);
+          		container.css('-webkit-transform','translate3d(0,0,0)');
+            	container.css('-moz-transform','translate3d(0,0,0)');
+              container.css('-ms-transform','translate3d(0,0,0)');
+              container.css('-o-transform','translate3d(0,0,0)');
+              container.css('transform','translate3d(0,0,0)');
+              containerWidth = container.css('width');
               if(!screen.width)
                 container.css('width',String(($window.innerWidth-278))+'px');
               else
                 container.css('width',String((screen.width-278))+'px');
           	}
+            //============================================================
+            //  toggle
+            //============================================================
+            function resetContainer(){
+              if(!$scope.bumpId)return;
+              container = angular.element($document[0].body).find('#'+$scope.bumpId);
+          		container.css('-webkit-transform','translate3d(0,0,0)');
+            	container.css('-moz-transform','translate3d(0,0,0)');
+              container.css('-ms-transform','translate3d(0,0,0)');
+              container.css('-o-transform','translate3d(0,0,0)');
+              container.css('transform','translate3d(0,0,0)');
+              container.css('width',containerWidth);
 
-
+          	}
 
             //============================================================
             //  open fall back
             //============================================================
             function openPushyFallback(){
           		body.addClass(pushyActiveClass);
-          		pushy.animate({left: "0px"}, menuSpeed);
+          		$scope.pushy.animate({left: "0px"}, menuSpeed);
           		container.animate({left: menuWidth}, menuSpeed);
           		push.animate({left: menuWidth}, menuSpeed); //css class to add pushy capability
           	}
@@ -182,7 +250,7 @@ pushContainerRight();
             //============================================================
             function closePushyFallback(){
           		body.removeClass(pushyActiveClass);
-          		pushy.animate({left: "-" + menuWidth}, menuSpeed);
+          		$scope.pushy.animate({left: "-" + menuWidth}, menuSpeed);
           		container.animate({left: "0px"}, menuSpeed);
           		push.animate({left: "0px"}, menuSpeed); //css class to add pushy capability
           	}
@@ -208,9 +276,12 @@ pushContainerRight();
                   return $scope.id;
             } // closeAllToggles
 
+
             //============================================================
             //   API
             //============================================================
+            this.toggle=togglePushy;
+            this.init=init;
             $scope.toggle=togglePushy;
             this.closeAllToggles = closeAllToggles;
             this.toggle=togglePushy;

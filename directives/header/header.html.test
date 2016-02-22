@@ -1,4 +1,4 @@
-<div class="bg-white">
+<div class="header bg-white">
   <!-- sign in -->
   <accounts-validation-header></accounts-validation-header>
   <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">
@@ -7,7 +7,7 @@
 
       <div class="navbar-header ">
         <!-- <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biologicial Diversity</span> -->
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggle('cbd-menu');cbdMenu.open=1;"><scbd-icon-button  type="fa" icon-name="fa-bars"  to-icon-name="fa-times" ani="tada" active="cbdMenu.open" ></scbd-icon-button> Convention on Biologicial Diversity</span>
+        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleCbdMenu();cbdMenu.open=1;"><scbd-icon-button  type="fa" icon-name="fa-bars"  to-icon-name="fa-times" ani="tada" active="cbdMenu.open" ></scbd-icon-button> Convention on Biologicial Diversity</span>
 
         <account-header user="user" style="position:absolute;right:65px;top:7px;"></account-header>
         <xuser-notifications-icon  style="position:absolute;right:45px;top:11px;" ></xuser-notifications-icon>
@@ -47,28 +47,31 @@
 
 
 <!-- cbd mobi menu -->
-<div id="portal-mobi-footer" style="text-align:center;" hide-gt-sm>
-  <div  style="max-height: 30px;">
-    <scbd-icon-button class="left" type='md' icon-name="menu" style="margin: 0 0 0 0;" ng-click="toggleCbdMenu()"></scbd-icon-button>
-    <scbd-icon-button class="left" ng-if="!user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" ></scbd-icon-button>
-    <scbd-icon-button class="left" ng-if="user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" ng-click="toggleAccMenu()"></scbd-icon-button>
+<div id="portal-mobi-footer" hide-gt-sm>
+  <div class="md-toolbar-tools" style="max-height: 30px;">
+    <scbd-icon-button type='md' icon-name="menu" style="margin: 0 0 0 0;" ng-click="toggleCbdMenu()">menu</scbd-icon-button>
+    <scbd-icon-button ng-if="!user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" >menu</scbd-icon-button>
+    <scbd-icon-button ng-if="user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" ng-click="toggleAccMenu()">menu</scbd-icon-button>
 
+    <account-header user="user"  ></account-header>
+    <span flex></span>
     <span>
       <img src="/app/libs/scbd-branding/images/cbd-leaf-white.svg" class="header-nav-img" />
       <span>CBD</span>
     </span>
-    <scbd-icon-button class="right" type='md' icon-name="notifications" style="margin: 0 0 0 0;" ></scbd-icon-button>
-    <scbd-icon-button class="right" type='md' icon-name="language" style="margin: 0 0 0 0;" ng-click="toggleAccMenu()"></scbd-icon-button>
+    <span flex></span>
+    <md-icon md-font-set="material-icons color-white" style="margin: 0 0 0 0;" ng-click="toggleNotMenu()">notifications</md-icon>
+    <md-icon md-font-set="material-icons color-white" style="padding: 0 15px 0 15px;;margin: 0 0 0 0;" ng-click="toggleLocaleMenu()">language</md-icon>
   </div>
 </div>
 
 
-<scbd-side-menu id="cbd-menu" sections="cbdMenu" overlay full-screen-height style="z-index:1000;">
+<scbd-side-menu id="cbd-menu" sections="cbdMenu" >
   <div  style="background-color:#009b48;">
       <img src="/app/libs/scbd-branding/images/cbd-logo-white-en.svg" style="padding:3px 0 3px 0;" />
   </div>
 </scbd-side-menu>
-<!-- <scbd-side-menu id="account-menu" sections="accMenu" >
+<scbd-side-menu id="account-menu" sections="accMenu" >
   <md-toolbar  style="background-color:#009b48;">
     <div layout="column" class="md-toolbar-tools-bottom inset">
       <span layout="row">
@@ -81,9 +84,8 @@
         <div style="font-size:16;font-weight:500;">{{user.email}}</div>
       </div>
   </md-toolbar>
-</scbd-side-menu> -->
+</scbd-side-menu>
 
-<!--
 <scbd-side-menu id="notifications-menu" sections="notifications-menu" side="right" ng-if="isXS">
   <div  style="background-color:#009b48;">
     <div layout="column" class="md-toolbar-tools-bottom inset">
@@ -105,7 +107,7 @@
     </span>
   </div>
 </div>
-</scbd-side-menu> -->
+</scbd-side-menu>
 
 
 </div>

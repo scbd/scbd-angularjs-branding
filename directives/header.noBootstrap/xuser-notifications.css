@@ -1,0 +1,45 @@
+
+.notifications {
+  width:100%;
+
+}
+.notifications table, th, td {
+
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item {
+    padding: 0 5px;
+    padding-bottom:10px;
+    margin: 5px 5px;
+    /*background: #ccc;*/
+    border-bottom:1px solid #ddd;
+}
+.notification-read  i, .notification-read  span, .notification-read div, .notification-read td, .notification-read strong, .notification-read a {
+    color:#bbb !important;
+}
+
+
+.notification-unread  i, .notification-unread strong{
+    color:#428bca !important;
+}
+
+.notification-unread  span , .notification-unread  div, .notification-unread  td  {
+    color:#333 !important;
+}
+@media (max-width: 767px) {
+  .notifications {
+
+    width:95%;
+
+  }
+}
+
+.notifications-panel{
+margin: 10px 10px 10px 10px ;
+  max-height:400px;overflow: scroll;
+}
+.col-centered{
+float: none;
+margin: 0 auto;
+}

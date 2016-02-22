@@ -11,11 +11,11 @@
 
 .pushy{
 
-    position: fixed;
+    position: absolute;
     width: 240px;
     height: 100%;
     top: 0;
-    z-index: 9999;
+    /*z-index: 9999;*/
     background: #009b48;
     font-size: 0.9em;
     font-weight: bold;
@@ -25,7 +25,9 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
 }
-
+.p-right{
+  right:0;
+}
 .pushy  a{
     display: block;
 
@@ -64,7 +66,13 @@
     transform: translate3d(0,0,0);
 }
 
-
+ /*.push-push{
+    -webkit-transform: translate3d(200px,0,0);
+    -moz-transform: translate3d(200px,0,0);
+    -ms-transform: translate3d(200px,0,0);
+    -o-transform: translate3d(200px,0,0);
+    transform: translate3d(200px,0,0);
+}*/
 
 /* Menu Transitions */
 
@@ -88,7 +96,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 9998;
+    z-index: 498;
     background-color: rgba(0,0,0,0.5);
     -webkit-animation: fade 500ms;
     -moz-animation: fade 500ms;

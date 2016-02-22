@@ -12,7 +12,8 @@ function(app,template) {
           template: template,
           require: ['^scbdSideMenu','^menuToggle'],
           controller: ['$scope','$element',function ($scope,$element) {
-            $scope.iconToggle={};
+
+
               // set initial style for link Item
               $element.find('button').addClass($scope.section.config.colorClass);
 
