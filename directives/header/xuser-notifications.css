@@ -1,44 +1,44 @@
 
-.notifications {
+#CBD-Branding .notifications {
   width:100%;
 
 }
-.notifications table, .notifications  th, .notifications td {
+#CBD-Branding .notifications table, #CBD-Branding .notifications  th, #CBD-Branding .notifications td {
   border-bottom: 1px solid #ddd;
 }
 
-.notification-item {
+#CBD-Branding .notification-item {
     padding: 0 5px;
     padding-bottom:10px;
     margin: 5px 5px;
     /*background: #ccc;*/
     border-bottom:1px solid #ddd;
 }
-.notification-read  i, .notification-read  span, .notification-read div, .notification-read td, .notification-read strong, .notification-read a {
+#CBD-Branding .notification-read  i, #CBD-Branding .notification-read  span, #CBD-Branding .notification-read div, #CBD-Branding .notification-read td, #CBD-Branding .notification-read strong, #CBD-Branding .notification-read a {
     color:#bbb !important;
 }
 
 
-.notification-unread  i, .notification-unread strong{
+#CBD-Branding .notification-unread  i, #CBD-Branding .notification-unread strong{
     color:#428bca !important;
 }
 
-.notification-unread  span , .notification-unread  div, .notification-unread  td  {
+#CBD-Branding .notification-unread  span , #CBD-Branding .notification-unread  div, #CBD-Branding .notification-unread  td  {
     color:#333 !important;
 }
 @media (max-width: 767px) {
-  .notifications {
+  #CBD-Branding .notifications {
 
     width:95%;
 
   }
 }
 
-.notifications-panel{
+#CBD-Branding .notifications-panel{
 margin: 10px 10px 10px 10px ;
   max-height:400px;overflow: scroll;
 }
-.col-centered{
+#CBD-Branding .col-centered{
 float: none;
 margin: 0 auto;
 }

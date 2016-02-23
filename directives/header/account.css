@@ -1,4 +1,5 @@
-.navbar-cbd-account {
+
+#CBD-Branding.navbar-cbd-account {
   font-size: 16px;
   margin-bottom: 0;
   z-index: 100;
@@ -8,7 +9,7 @@
   line-height: 30px;
   font-weight: 200;
 }
-.fa-fix {
+#CBD-Branding#CBD-Branding.fa-fix {
   left: 0px;
 }
 .user-logged-in {
@@ -19,28 +20,28 @@
   left: -16px;
 }
 @media screen and (max-width: 480px) {
-  .drop-menu-position {
+  #CBD-Branding.drop-menu-position {
     position: absolute;
     left: -150px;
     top: 23px;
   }
 }
 @media screen and (min-width: 250px) {
-  .drop-menu-position {
+  #CBD-Branding.drop-menu-position {
     position: absolute;
     left: -80px;
   }
-  .dropdown-menu li a {
+  #CBD-Branding.dropdown-menu li a {
     font-size: 16px;
   }
-  .dropdown-menu > li > a:hover {
+  #CBD-Branding.dropdown-menu > li > a:hover {
     color: #428bca!important;
   }
-  .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
     background-color: #009b48;
     color: white;
   }
-  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
     background-image: none;
   }
 }
@@ -49,30 +50,30 @@
     color: black;
     font-size: 14px;
   }
-  .drop-menu-position {
+  #CBD-Branding.drop-menu-position {
     position: absolute;
     left: -80px;
   }
-  .dropdown-menu {
+  #CBD-Branding.dropdown-menu {
     background-color: white;
     padding: 3px;
   }
-  .navbar-default .navbar-nav .dropdown-menu li {
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.dropdown-menu li {
     margin: 0;
     padding: 0;
   }
-  .dropdown-menu > li > a:hover {
+  #CBD-Branding.dropdown-menu > li > a:hover {
     color: #428bca!important;
   }
-  .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
     background-color: #009b48;
   }
-  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
     background-image: none;
   }
 }
 @media screen and (min-width: 810px) {
-  .drop-menu-position {
+  #CBD-Branding.drop-menu-position {
     position: absolute;
     left: 0px;
   }

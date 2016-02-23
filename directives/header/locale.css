@@ -1,4 +1,4 @@
-.locale {
+#CBD-Branding .locale {
   font-size: 16px;
   margin-bottom: 0;
   border: 0;
@@ -9,9 +9,9 @@
   line-height: 30px;
   font-weight: 200;
 }
-.locale-menu{  position:absolute;
+#CBD-Branding .locale-menu{  position:absolute;
   left:-80px;}
-  .badge {
+  #CBD-Branding .badge {
     display: inline-block;
     min-width: 10px;
     padding: 3px 7px;

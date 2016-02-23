@@ -1,41 +1,41 @@
-.header h1 {
+#CBD-Branding .header h1 {
   font-size: 60px;
   background-color: #fff;
 }
 
-.header {
+#CBD-Branding .header {
   font-size: 14px;
 
 }
-.header span:focus {
+#CBD-Branding .header span:focus {
   -webkit-box-shadow: none;
   outline: -webkit-focus-ring-color auto 0px;
 }
-.header a:hover{
+#CBD-Branding .header a:hover{
   color: #428bca!important;
   text-decoration: none;
 
 }
 
-.navlist {
+#CBD-Branding .navlist {
     margin: 0;
     padding: 0;
     display: inline;
 }
 
-.header-nav-img {
+#CBD-Branding .header-nav-img {
   max-height: 24px;
   position: relative;
   top: -2px;
   padding: 0 0 0 0;
   margin: 0;
 }
-.brand {
+#CBD-Branding .brand {
   color:#333;
   font-size: 15px;
   padding: 0 10px 0 0;
 }
-.navbar-cbd {
+#CBD-Branding .navbar-cbd {
     min-height: 30px;
     margin-bottom: 0;
     border: 0;
@@ -43,7 +43,7 @@
     border-bottom: 1px solid rgb(231, 231, 231);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
 }
-.container-cbd {
+#CBD-Branding .container-cbd {
   /*background-color: #009b48!important;*/
   /*color:white;*/
   color: #bdbdbd;
@@ -52,36 +52,36 @@
   list-style-type: none;
 }
 
-.container-cbd-icon {
+#CBD-Branding .container-cbd-icon {
   color: #bdbdbd;
   cursor: pointer;
 }
-.cbd-toggle{
+#CBD-Branding .cbd-toggle{
   color: #bdbdbd;
 
   cursor: pointer;
   font-size: 80%;
 
 }
- .bump-up-one{bottom:1px;}
+ #CBD-Branding .bump-up-one{bottom:1px;}
 
- .navlist {
+ #CBD-Branding .navlist {
   margin: 0;
   padding: 0;
   display: inline;
   padding-left: 40px;
 }
- .navlist li {
+ #CBD-Branding .navlist li {
   display: inline;
   list-style-type: none;
   padding: 0 15px 0 0;
   margin: 0;
   line-height: 20px;
 }
- .header .navbar-default .navbar-nav li {
+ #CBD-Branding .header #CBD-Branding .navbar-default #CBD-Branding .navbar-nav li {
   padding: 0 10px;
 }
-/*.navbar-default .navbar-nav li a {
+/*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a {
     color: #bdbdbd;
     cursor:pointer;
   padding: 0 0 0 5px;
@@ -90,65 +90,65 @@
   letter-spacing: 1.5px;
   font-weight: 200;
 }*/
-/*.navbar-default .navbar-nav li a:hover {
+/*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a:hover {
   color: white;     color: #428bca!important;
 }*/
- .mobi-menu-btn {
+ #CBD-Branding .mobi-menu-btn {
   right: 30px;
   float: none;
   line-height: 32px;
   cursor: pointer;
 }
- .header .navbar-toggle {
+ #CBD-Branding .header #CBD-Branding .navbar-toggle {
   border: 0;
   color: white;
   padding: 0 5px;
   margin: 0 0 0 15px;
 }
-.fa-fix2 {
+#CBD-Branding .fa-fix2 {
   left: 0;
 }
- .header .navbar-default .navbar-toggle {
+ #CBD-Branding .header .navbar-default .navbar-toggle {
   background-color: #fff!important;
 }
 @media (max-width: 990px) {
- .header .navbar-header {
+ #CBD-Branding .header #CBD-Branding .navbar-header {
     float: none;
   }
- .header .navbar-toggle {
+ #CBD-Branding .header #CBD-Branding .navbar-toggle {
     display: inline;
   }
- .header .navbar-collapse {
+ #CBD-Branding .header #CBD-Branding .navbar-collapse {
     border-top: 1px solid transparent;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
- .header .navbar-collapse.collapse {
+ #CBD-Branding .header #CBD-Branding .navbar-collapse #CBD-Branding .collapse {
     display: none!important;
   }
- .header .navbar-nav {
+ #CBD-Branding .header #CBD-Branding .navbar-nav {
     float: none!important;
     margin: 7.5px -15px;
   }
-.header   .navbar-nav>li {
+#CBD-Branding .header   #CBD-Branding .navbar-nav>li {
     float: none;
   }
- .header .navbar-nav>li>a {
+ #CBD-Branding .header #CBD-Branding .navbar-nav>li>a {
     padding-top: 10px;
     padding-bottom: 10px;
   }
-.header .navbar-collapse.collapse.in {
+#CBD-Branding .header #CBD-Branding .navbar-collapse #CBD-Branding .collapse.in {
     display: block!important;
   }
-.header .collapsing {
+#CBD-Branding.header #CBD-Branding.collapsing {
     overflow: hidden!important;
   }
 }
 @media (max-width: 767px) {
- .header .navbar-default .navbar-nav .open .dropdown-menu li a {
+#CBD-Branding .header #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.open #CBD-Branding.dropdown-menu li a {
     color: white;
   }
 }
- .btn1 {
+#CBD-Branding .btn1 {
   color : rgb(49, 46, 46);
   background-color: rgba(255, 222, 121, 0.96);
   border-radius: 10px 0 0 10px;
