@@ -16,7 +16,7 @@ function(app,  iconate,_) {
               transclude: true,
       //type from to to
       scope:{active:'='},
-              template: '<i  >{{iconName}}<ng-transclude></ng-transclude></i>',
+              template: '<i  ng-cloak>{{iconName}}<ng-transclude></ng-transclude></i>',
               link:function ($scope, $element, $attr) {
 
                 var iconName;

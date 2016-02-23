@@ -47,18 +47,19 @@
 
 
 <!-- cbd mobi menu -->
-<div id="portal-mobi-footer" style="text-align:center;" hide-gt-sm>
+<div id="portal-mobi-footer" style="text-align:center;" ng-cloak hide-gt-sm>
   <div  style="max-height: 30px;">
     <scbd-icon-button class="left" type='md' icon-name="menu" style="margin: 0 0 0 0;" ng-click="toggleCbdMenu()"></scbd-icon-button>
     <scbd-icon-button class="left" ng-if="!user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" ></scbd-icon-button>
     <scbd-icon-button class="left" ng-if="user.isAuthenticated" type='md' icon-name="person" style="margin: 0 0 0 0;" ng-click="toggleAccMenu()"></scbd-icon-button>
 
-    <span>
+    <span style="font-size:15px; position:relative;margin-right:30px;">
       <img src="/app/libs/scbd-branding/images/cbd-leaf-white.svg" class="header-nav-img" />
-      <span>CBD</span>
+      <span style="font-size:15px;position:absolute;bottom:8px;">CBD</span>
     </span>
-    <scbd-icon-button class="right" type='md' icon-name="notifications" style="margin: 0 0 0 0;" ></scbd-icon-button>
     <scbd-icon-button class="right" type='md' icon-name="language" style="margin: 0 0 0 0;" ng-click="toggleAccMenu()"></scbd-icon-button>
+    <scbd-icon-button class="right" type='md' icon-name="notifications" style="margin: 0 0 0 0;" ></scbd-icon-button>
+
   </div>
 </div>
 
