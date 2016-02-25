@@ -10,7 +10,7 @@ function(app) {
             replace: true,
             transclude: true,
             scope:{},
-            template: ' <button class="btn"><ng-transclude></ng-transclude></button>',
+            template: ' <button class="scbd-btn"><ng-transclude></ng-transclude></button>',
             link:function ($scope, $element, $attr) {
                 wavesService.attach($element, [ 'waves-effect']);
                 wavesService.init();
@@ -25,7 +25,7 @@ function(app) {
             replace: true,
             transclude: true,
             scope:{},
-            template: ' <button class="btn-floating" ><ng-transclude></ng-transclude></button>',
+            template: ' <button class="scbd-btn-floating" ><ng-transclude></ng-transclude></button>',
             link:function ($scope, $element, $attr) {
                 wavesService.init();
                 wavesService.attach($element, ['waves-effect','waves-circle', 'waves-float', 'waves-light']);
@@ -40,7 +40,7 @@ function(app) {
             replace: true,
             transclude: true,
             scope:{backGround:'@',color:'@'},
-            template: ' <button class="btn-flat" ><ng-transclude></ng-transclude></button>',
+            template: ' <button class="scbd-btn-flat" ><ng-transclude></ng-transclude></button>',
             //left:-1px;text-align:left;padding:0 5px 0 5px;
             link:function ($scope, $element, $attr) {
                 wavesService.init();
