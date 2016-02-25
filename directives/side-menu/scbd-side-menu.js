@@ -109,7 +109,7 @@ define(['app',
 
                 scbdMenuService.registerNavInstance(navId,scbdSideMenu);
 
-                console.log('$scope.fullScreenHeight',$scope.fullScreenHeight);
+
                 if($scope.fullScreenHeight)
                   pushy.css('position','fixed');
 

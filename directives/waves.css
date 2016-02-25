@@ -112,11 +112,14 @@
   z-index: 1;
 }
 .waves-circle {
+  position:relative;
+vertical-align: middle;
   text-align: center;
-  width: 2.5em;
-  height: 2.5em;
-  line-height: 2.5em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
   border-radius: 50%;
+
 }
 .waves-float {
   -webkit-mask-image: none;
