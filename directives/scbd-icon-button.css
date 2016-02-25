@@ -95,26 +95,22 @@
           margin-right: 3px; }
           .fa-badge.fa-badge--overlap:after {
             right: -7px;top:-8px; }
+.material-icons {
+font-size:inherit
+}
 
 .btn-icon i{
-  display: inline-block;
   text-align: center;
   color: inherit;
-  line-height: 37px;
-  width:37px;
-  heigth:37px;
-  cursor: pointer;;
-  font-size: 25px;
+  cursor: pointer;
+    font-size:inherit;
 }
 .btn-icon{
-  display: inline-block;
+vertical-align:top;
   text-align: center;
   color: inherit;
-  line-height: 37px;
-  width:37px;
-  heigth:37px;
   cursor: pointer;
-  font-size: 25px;
+  font-size:inherit;
 }
 /*-- credit to:*/
 /*!

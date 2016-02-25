@@ -16,14 +16,14 @@ function(app,  iconate,_) {
               transclude: true,
       //type from to to
       scope:{active:'='},
-              template: '<i  ng-cloak>{{iconName}}<ng-transclude></ng-transclude></i>',
+              template: '<i >{{iconName}}<ng-transclude></ng-transclude></i>',
               link:function ($scope, $element, $attr) {
 
                 var iconName;
                 var toIconName;
                 var options; // inimation-transform options
 
-                //$element.addClass('btn-icon');
+                $element.addClass('btn-icon');
                 if($attr.hasOwnProperty('waves') && $attr.waves!=='false' && $attr.waves!=='0'){
                   wavesService.init();
                   wavesService.attach($element, ['waves-effect','waves-circle']);//,'waves-circle'
