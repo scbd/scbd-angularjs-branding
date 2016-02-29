@@ -31,13 +31,13 @@ define(['app','lodash'],function(app,_) {
 
         });
         menus.dashboard.push({
-          name: 'Your Events',
+          name: 'Side Events',
           type: 'link',
           mdIcon: 'event',
           path: '#',
         });
         menus.dashboard.push({
-          name: 'Your Organizations',
+          name: 'Organizations',
           type: 'link',
           mdIcon: 'business',
           path: '#',
@@ -55,7 +55,7 @@ define(['app','lodash'],function(app,_) {
           mdIcon: 'supervisor_account',
           pages: [
             {
-              name: 'Events',
+              name: 'Side Events',
               type: 'link',
               path: '/manage/events',
               mdIcon: 'event',
@@ -73,7 +73,7 @@ define(['app','lodash'],function(app,_) {
             mdIcon: 'nature_people',
 
           }, {
-            name: 'Plevra Configuration',
+            name: 'Inde Configuration',
             path: '/manage/config',
             type: 'link',
             imgSrc: '/app/images/cbd-leaf-green.svg',

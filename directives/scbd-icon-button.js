@@ -15,13 +15,16 @@ function(app,  iconate,_) {
               replace: true,
               transclude: true,
       //type from to to
-      scope:{active:'='},
-              template: '<i >{{iconName}}<ng-transclude></ng-transclude></i>',
+      scope:{active:'=',
+    },
+              template: '<i ng-click="click();">{{iconName}}<ng-transclude></ng-transclude></i>',
               link:function ($scope, $element, $attr) {
 
                 var iconName;
                 var toIconName;
                 var options; // inimation-transform options
+                // $scope.on = ($attr.hasOwnProperty('on') &&  )|| 0;
+                // if($scope.on)transform();
 
                 $element.addClass('btn-icon');
                 if($attr.hasOwnProperty('waves') && $attr.waves!=='false' && $attr.waves!=='0'){
@@ -53,6 +56,10 @@ function(app,  iconate,_) {
                       transformInit();
                 }
 
+                $scope.click=function(){
+                  if($attr.ani && $attr.type === 'fa')
+                    $scope.toggle();
+                };
                   //============================================================
                   //
                   //============================================================
@@ -63,22 +70,29 @@ function(app,  iconate,_) {
 
                         $scope.toggle = function (){
 
-                            if($scope.active)
+                            if($scope.on)
                                 transformBack();
                             else
                                 transform();
 
+                            $scope.on=!$scope.on;
 
                         };
                         $timeout(function(){
                             $scope.$watch('active',function(newValue, oldValue) {
-                              if (newValue !== oldValue)
-                                $scope.toggle();}
-                            );
+                              //if (newValue !== oldValue){
+                                  if($scope.active)
+                                    transform();
+                                  else
+                                    transformBack();
+
+                              //}
+
+                            });
                         },2000);
-                        if($scope.active){
-                          $scope.toggle();
-                        }
+                        // if($scope.active){
+                        //   $scope.toggle();
+                        // }
                   }//transfor
 
                   //============================================================
