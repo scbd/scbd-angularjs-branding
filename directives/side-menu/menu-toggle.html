@@ -1,4 +1,4 @@
-<div ng-click="toggle()" aria-expanded="section.open"  style="position:relative;height:40px;">
+<div ng-click="toggle()" aria-expanded="section.open"  style="position:relative;height:40px;" ng-if="hasRole()">
   <!-- flex -->
 
 <scbd-icon-button class="right" style="position:absolute;right:8px;top:8px;" type="fa" icon-name="fa-plus"  to-icon-name="fa-times" ani="tada" active="section.open" ></scbd-icon-button>

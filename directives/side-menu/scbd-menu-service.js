@@ -34,13 +34,13 @@ define(['app','lodash'],function(app,_) {
           name: 'Side Events',
           type: 'link',
           mdIcon: 'event',
-          path: '#',
+          path: '/manage/events',
         });
         menus.dashboard.push({
           name: 'Organizations',
           type: 'link',
           mdIcon: 'business',
-          path: '#',
+          path: '/manage/organizations',
         });
         // menus.dashboard.push({
         //   name: 'heading',
@@ -53,6 +53,7 @@ define(['app','lodash'],function(app,_) {
           type: 'toggle',
           open:1,
           mdIcon: 'supervisor_account',
+          roles:['Administrator','IndeAdministrator'],
           pages: [
             {
               name: 'Side Events',
@@ -76,11 +77,11 @@ define(['app','lodash'],function(app,_) {
             name: 'Inde Configuration',
             path: '/manage/config',
             type: 'link',
-            imgSrc: '/app/images/cbd-leaf-green.svg',
+            imgSrc: '/app/images/inde-logo.svg',
           },
           {
             name: 'User Management',
-            path: 'https://www.cbd.int/convention/parties/list/',
+            path: '/manage/users',
             type: 'link',
             faIcon: 'fa fa-users',
             faIconSize: 'fa-lg',
