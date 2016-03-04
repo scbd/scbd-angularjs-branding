@@ -1,10 +1,10 @@
-define(['app',
-  'text!./xuser-notifications.html','lodash','moment','ionsound',
+define(['app','ionsound',
+  'text!./xuser-notifications.html','lodash','moment',
   'css!./xuser-notifications',
   'scbd-angularjs-filters/schema-name',
   'scbd-angularjs-filters/l-string',
   'scbd-angularjs-services/user-notifications'],
-function(app,template,_,moment) {
+function(app, iosound,template,_,moment) {
     app.service("cfgUserNotification", function(){
         var notificationUrls = {
             documentNotificationUrl     : '/register/requests/',
@@ -82,22 +82,7 @@ function(app,template,_,moment) {
                                 .then(function(data) {
                                     if (!data || data.length === 0)
                                         return;
-                                    var localNotifications;
-                                    if ($scope.notifications) {
-                                        localNotifications = _.clone($scope.notifications);
-                                        _.each(data, function(message) {
-                                            var exists = _.findWhere(localNotifications,{'id':message.id});
-                                            if(!exists)
-                                                localNotifications.push(message);
-                                        });
-
-                                        if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
-                                            ion.sound.play("bell_ring");
-                                    } else {
-                                        localNotifications = data;
-                                    }
-                                    $scope.notifications = [];
-                                    $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
+                                    processNotifications();
                                 })
                                 .catch(function(error){
                                     if(error.data && error.data.statusCode==401){
@@ -105,16 +90,9 @@ function(app,template,_,moment) {
                                         //authentication.getUser(true);
                                          continueNotification = false;
                                     }
-                                })
-                                .finally(function() {
-                                    if(continueNotification)
-                                        notificationTimer =  $timeout(function() { getNotification();}, 10000);
-//                                   notificationTimer.then(function(){
-//                                        //console.log('finished with timer');
-//                                    }).catch(function(){
-//                                        //console.log('rejected timer');
-//                                    });
                                 });
+
+
                             //}
                         }
 
@@ -165,30 +143,20 @@ function(app,template,_,moment) {
                         return notification && notification.state == 'unread';
                     };
 
-                    $scope.$on('$destroy', function(evt){
-                        //console.log('$destroy');
-                        $timeout.cancel(notificationTimer);
-                    });
 
-//                    $scope.$on('signIn', function(evt,user){
-//                        $timeout(function(){
-//                            console.log('notification after signin')
-//                            getNotification();
-//                            },5000);
-//                    });
-    	           $scope.$on('signOut', function(evt,user){
-                             //console.log('notification timer signout')
-                       $timeout.cancel(notificationTimer);
-                    });
                     getNotification();
 
                     $rootScope.$watch('user', function(newVla,oldVal){
                         //console.log(newVla,oldVal)
                         if(newVla && newVla!=oldVal){
-                            // console.log('user changed');
-                            $timeout.cancel(notificationTimer);
                             if(newVla.isAuthenticated)
                                 getNotification();
+                        }
+                    });
+
+                    $rootScope.$on('event:server-pushNotification', function(evt,data){
+                        if(data.type == 'userNotification'){
+                            processNotifications([data.data]);
                         }
                     });
 
@@ -214,6 +182,25 @@ function(app,template,_,moment) {
                         }
 
                     });
+
+                    function processNotifications(data){
+                        var localNotifications;
+                        if ($scope.notifications) {
+                            localNotifications = _.clone($scope.notifications);
+                            _.each(data, function(message) {
+                                var exists = _.findWhere(localNotifications,{'id':message.id});
+                                if(!exists)
+                                    localNotifications.push(message);
+                            });
+
+                            if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
+                                ion.sound.play("bell_ring");
+                        } else {
+                            localNotifications = data;
+                        }
+                        $scope.notifications = [];
+                        $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
+                    }
 
                     ion.sound({
                         sounds: [
