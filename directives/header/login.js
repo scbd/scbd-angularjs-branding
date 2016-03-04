@@ -31,9 +31,12 @@ app.directive('loginAccount', function ($http) {
                     $scope.waiting      = true;
                     authentication.signIn($scope.email, $scope.password)
                     .then(function(user){
-                          
+
                           $scope.user=user;
                           $timeout(function(){$('#loginDialog').modal('hide');});
+
+
+
                     })
                     .catch(function onerror(error) {
                         $scope.password     = "";
@@ -42,6 +45,7 @@ app.directive('loginAccount', function ($http) {
                     })
                     .finally(function(){
                         $scope.waiting      = false;
+                        location.reload('/');
                     });
               };
 
