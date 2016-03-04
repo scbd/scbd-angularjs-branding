@@ -39,20 +39,16 @@ function(app,template,_) {
               //
               //============================================================
               $scope.hasRole = function () {
-// console.log($scope.section.roles);
 
                   if(!$scope.section.roles)
                     return true;
                   else if(!$scope.user)
                     return false;
                   else{
-                    console.log(_.intersection($scope.section.roles, $scope.user.roles).length>0);
                         return _.intersection($scope.section.roles, $scope.user.roles).length>0;
 
                   }
-
-
-              }
+              };//hasRole
 
           }],//cotrroller
           link: function($scope, $element, $attr, ctrls) {

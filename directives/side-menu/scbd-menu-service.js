@@ -12,82 +12,6 @@ define(['app','lodash'],function(app,_) {
 
         var menus={};
 
-        menus.dashboard= [];
-        menus.dashboard.push({
-          type: 'config',
-          menuClass:'dash-menu',
-          colorClass: 'dash-menu-color',
-          activeClass: 'dash-menu-active',
-          iconClass: 'pulse',
-          selfMenu:menus.dashboard,
-          childrenColorClass: 'dash-menu-children-color',
-          childrenActiveClass: 'dash-menu-children-active'
-        });
-        menus.dashboard.push({
-          name: 'Dashboard',
-          type: 'link',
-          mdIcon: 'dashboard',
-          path: '/manage',
-
-        });
-        menus.dashboard.push({
-          name: 'Side Events',
-          type: 'link',
-          mdIcon: 'event',
-          path: '/manage/events',
-        });
-        menus.dashboard.push({
-          name: 'Organizations',
-          type: 'link',
-          mdIcon: 'business',
-          path: '/manage/organizations',
-        });
-        // menus.dashboard.push({
-        //   name: 'heading',
-        //   type: 'heading',
-        //
-        //
-        // });
-        menus.dashboard.push({
-          name: 'Administration',
-          type: 'toggle',
-          open:1,
-          mdIcon: 'supervisor_account',
-          roles:['Administrator','IndeAdministrator'],
-          pages: [
-            {
-              name: 'Side Events',
-              type: 'link',
-              path: '/manage/events',
-              mdIcon: 'event',
-            },
-            {
-              name: 'Organizations',
-              type: 'link',
-              path: '/manage/organizations',
-              mdIcon: 'business',
-            },
-            {
-            name: 'Meetings',
-            type: 'link',
-            path: '/manage/meetings',
-            mdIcon: 'nature_people',
-
-          }, {
-            name: 'Inde Configuration',
-            path: '/manage/config',
-            type: 'link',
-            imgSrc: '/app/images/inde-logo.svg',
-          },
-          {
-            name: 'User Management',
-            path: '/manage/users',
-            type: 'link',
-            faIcon: 'fa fa-users',
-            faIconSize: 'fa-lg',
-          }],
-        });
-
 
 
         menus.localeMenu= [];
@@ -390,26 +314,31 @@ define(['app','lodash'],function(app,_) {
           ]
         });
 //link config options
+      //============================================================
+      //
+      //
+      //============================================================
+      function validateMenus() {
+        _.each(menus, function(menu) {
+          var config = _.findWhere(menu, {
+            'type': 'config'
+          });
+          _.each(menu, function(menuItem) {
+            if (menuItem.type === 'config') return;
 
-    _.each(menus,function(menu){
-        var config= _.findWhere(menu,{'type':'config'});
-      _.each(menu,function(menuItem){
-              if(menuItem.type==='config')return;
-
-              if(menuItem.type==='toggle'){
-                menuItem.config=config;
-                _.each(menuItem.pages,function(page){
-                    page.config=config;
-                    page.isChild=true;
-                });
-              }
-              else {
-                menuItem.config=config;
-              }
-      });
-
-
+            if (menuItem.type === 'toggle') {
+              menuItem.config = config;
+              _.each(menuItem.pages, function(page) {
+                page.config = config;
+                page.isChild = true;
+              });
+            } else {
+              menuItem.config = config;
+            }
+          });
         });
+      }//validate menues
+
         //=======================================================================
         //
         //=======================================================================
@@ -423,30 +352,6 @@ define(['app','lodash'],function(app,_) {
             throw "Error: thrying to register a nav controler in the scbd-menuservice with out a navId";
         }
 
-        // //============================================================
-        // //
-        // //
-        // //============================================================
-        // function isOpenRight(navId){
-        // //  return $mdSidenav(navId).isOpen();
-        // }
-        //
-        // //============================================================
-        // //
-        // //
-        // //============================================================
-        // function debounce(func, wait, context) {
-        //   var timer;
-        //   return function debounced() {
-        //     //var context = $scope,
-        //     var    args = Array.prototype.slice.call(arguments);
-        //     $timeout.cancel(timer);
-        //     timer = $timeout(function() {
-        //       timer = undefined;
-        //       func.apply(context, args);
-        //     }, wait || 10);
-        //   };
-        // }
 
         //============================================================
         //
@@ -464,7 +369,7 @@ define(['app','lodash'],function(app,_) {
 
           var cancelId = setInterval(function() {
             if (navRegistry[navId]) {
-console.log('navRegistry',navRegistry);
+
               deferred.resolve(navRegistry[navId]);
               deferred.resolved = 1;
               clearInterval(cancelId);
@@ -479,39 +384,26 @@ console.log('navRegistry',navRegistry);
           }, 5000);
           return deferred.promise;
         }
-        // //============================================================
-        // //
-        // //
-        // //============================================================
-        // function buildDelayedToggler(navID,scope) {
-        //
-        //   // return debounce(function() {
-        //   //   $mdSidenav(navID)
-        //   //     .toggle();
-        //   // }, 200,scope);
-        // }
-        // //============================================================
-        // //
-        // //
-        // //============================================================
-        // function close(navID) {
-        //     // $mdSidenav(navID).toggle(false);
-        //   }
-        //   //============================================================
-        //   //
-        //   //
-        //   //============================================================
-        //   function open(navID) {
-        //       // $mdSidenav(navID).toggle(true);
-        //     }
 
+        //============================================================
+        //
+        //============================================================
+        function addMenu() {
+              _.each(navRegistry,function(navCtrl){
+                  navCtrl.close();
+              });
+        }
+        //============================================================
+        //
+        //============================================================
+        function getMenu(menuName) {
+              return menus[menuName];
+        }
           //============================================================
           //
           //============================================================
-          function closeAll() {
-                _.each(navRegistry,function(navCtrl){
-                    navCtrl.close();
-                });
+          function closeAll(menuName) {
+                menus[menuName]=[];
           }
           //============================================================
           //
@@ -563,6 +455,9 @@ console.log('navRegistry',navRegistry);
 
           		return (supported !== undefined && supported.length > 0 && supported !== "none");
             }
+
+            validateMenus();
+
           return  {
             cssTransforms3d:cssTransforms3d,
             closeAllActive:closeAllActive,
@@ -571,10 +466,14 @@ console.log('navRegistry',navRegistry);
             toggle: toggle,
             close: close,
             open: open,
+            menus:menus,
+            addMenu:addMenu,
+            getMenu:getMenu,
             cbdMenu:menus.cbdMenu,
             accMenu:menus.accMenu,
             localeMenu:menus.localeMenu,
-            dashboard:menus.dashboard
+            dashboard:menus.dashboard,
+            validateMenus:validateMenus
           };
 
       }]);

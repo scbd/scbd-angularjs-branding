@@ -9,7 +9,8 @@ define(['app',
   ],
   function(app, template, _) {
     //============================================================
-    //  angualr implimentation of Pushy - v0.9.2 - 2014-9-13
+    //  angullar implimentation of by scbd
+    // Pushy - v0.9.2 - 2014-9-13
     //  github.com/christophery/pushy
     //============================================================
     app.directive('scbdSideMenu',['scbdMenuService','$document', function(scbdMenuService,$document) {

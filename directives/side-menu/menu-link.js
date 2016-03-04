@@ -4,10 +4,11 @@ define(['app',
   'lodash',
   'css!./menu-link',
   '../scbd-button',
-  './scbd-menu-service'
+  './scbd-menu-service',
+  'scbd-angularjs-services/authentication'
 ],
 function(app,template,_) {
-        app.directive('menuLink', ['$window','$location','$timeout','scbdMenuService',function ($window,$location,$timeout,scbdMenuService) {
+        app.directive('menuLink', ['$window','$location','$timeout','scbdMenuService','authentication',function ($window,$location,$timeout,scbdMenuService,auth) {
             return {
               scope: {
                 section: '='
@@ -16,6 +17,11 @@ function(app,template,_) {
               template: template,
               controller: function ($scope,$element ){
 
+                auth.getUser().then(function(user){
+
+                  $scope.user = user;
+    //              console.log($scope.user);
+                });
                     // set initial style for link Item
                     var colorClass;
                     var activeClass;
@@ -145,6 +151,26 @@ function(app,template,_) {
                         }
                         return false;
                       }
+
+                      //============================================================
+                      //
+                      //
+                      //============================================================
+                      $scope.hasRole = function () {
+        // console.log($scope.section.roles);
+
+                          if(!$scope.section.roles)
+                            return true;
+                          else if(!$scope.user)
+                            return false;
+                          else{
+                                return _.intersection($scope.section.roles, $scope.user.roles).length>0;
+
+                          }
+
+
+                      }
+
                     //============================================================
                     //   API
                     //============================================================
