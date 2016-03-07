@@ -28,8 +28,8 @@ function(app,_) {
               $element.find('.scbd-tt-content').css('left','-'+mid+'px');
 
                 $element.on('mouseenter', function(e) {
-console.log('event',$element.find('.scbd-tt-content').width());
-console.log('event',$element.width());
+// console.log('event',$element.find('.scbd-tt-content').width());
+// console.log('event',$element.width());
                            });
                 }//link
             };//return
