@@ -9,17 +9,18 @@ function(app,template,_) {
         app.directive('menuToggle', ['authentication',function (auth ) {
       return {
           scope: {
-            section: '='
+            section: '=',
+            user:'=?'
           },
           template: template,
           require: ['^scbdSideMenu','^menuToggle'],
           controller: ['$scope','$element',function ($scope,$element) {
 
-              auth.getUser().then(function(user){
-
-                $scope.user = user;
-  //              console.log($scope.user);
-              });
+  //             auth.getUser().then(function(user){
+  //
+  //               $scope.user = user;
+  // //              console.log($scope.user);
+  //             });
 
               // set initial style for link Item
               $element.find('button').addClass($scope.section.config.colorClass);

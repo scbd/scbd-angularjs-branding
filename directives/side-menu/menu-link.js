@@ -11,17 +11,18 @@ function(app,template,_) {
         app.directive('menuLink', ['$window','$location','$timeout','scbdMenuService','authentication',function ($window,$location,$timeout,scbdMenuService,auth) {
             return {
               scope: {
-                section: '='
+                section: '=',
+                user:'=?'
               },
               require:'^menuLink',
               template: template,
               controller: function ($scope,$element ){
 
-                auth.getUser().then(function(user){
-
-                  $scope.user = user;
-    //              console.log($scope.user);
-                });
+    //             auth.getUser().then(function(user){
+    //
+    //               $scope.user = user;
+    // //              console.log($scope.user);
+    //             });
                     // set initial style for link Item
                     var colorClass;
                     var activeClass;

@@ -13,7 +13,7 @@ define(['app',
     // Pushy - v0.9.2 - 2014-9-13
     //  github.com/christophery/pushy
     //============================================================
-    app.directive('scbdSideMenu',['scbdMenuService','$document', function(scbdMenuService,$document) {
+    app.directive('scbdSideMenu',['scbdMenuService','$document','authentication', function(scbdMenuService,$document,auth) {
       return {
         restrict: 'E',
         priority: 0, //parent has 0 priority
@@ -28,8 +28,12 @@ define(['app',
         //
         //
         //============================================================
-        link: function($scope, $element, $attr,scbdSideMenu) {
+        link: function($scope, $element, $attr,scbdSideMenu,$window) {
 
+          auth.getUser().then(function(user){
+
+            $scope.user = user;
+          });
           $scope.isOpen=false;
           if($attr.hasOwnProperty('fullScreenHeight')){
               $scope.fullScreenHeight = true;

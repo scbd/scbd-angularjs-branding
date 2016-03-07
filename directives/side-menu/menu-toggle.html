@@ -11,6 +11,6 @@
 </div>
 <ul id="side-menu-{{section.name}}"  class="menu-toggle-list" ng-show="section.open">
   <li ng-repeat="page in section.pages" style="color:{{childrenColor}};background-color:{{childrenBackGround}};">
-    <menu-link section="page"></menu-link>
+    <menu-link section="page" user="user"></menu-link>
   </li>
 </ul>

@@ -5,14 +5,17 @@ define(['app','lodash'],function(app,_) {
 
 
   app.factory('scbdMenuService', [
-      '$location','$timeout','$q',
+      '$location','$timeout','$q','$rootScope',
 
-      function ($location,$timeout,$q) {
+      function ($location,$timeout,$q,$rootScope) {
         var navRegistry={};
-
         var menus={};
+        var history=[];
 
-
+        $rootScope.$on('$locationChangeSuccess', function(event, url, oldUrl, state, oldState){
+            history.push({'from':oldUrl,'to':url});
+            console.log(history);
+        });
 
         menus.localeMenu= [];
         menus.localeMenu.push({
@@ -459,6 +462,7 @@ define(['app','lodash'],function(app,_) {
             validateMenus();
 
           return  {
+            history:history,
             cssTransforms3d:cssTransforms3d,
             closeAllActive:closeAllActive,
             registerNavInstance:registerNavInstance,
