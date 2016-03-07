@@ -12,7 +12,9 @@ define(['app'], function(app) {
       var isGtLg;
 
       angular.element($window).on('resize',setMedia);
-
+      $($window).resize(function() {
+            setMedia();
+          });
       function setMedia(){
 
           if(!screen.width){
