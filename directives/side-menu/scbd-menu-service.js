@@ -14,7 +14,6 @@ define(['app','lodash'],function(app,_) {
 
         $rootScope.$on('$locationChangeSuccess', function(event, url, oldUrl, state, oldState){
             history.push({'from':oldUrl,'to':url});
-            console.log(history);
         });
 
         menus.localeMenu= [];
