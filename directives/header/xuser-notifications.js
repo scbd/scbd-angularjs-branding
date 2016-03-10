@@ -82,7 +82,7 @@ function(app, iosound,template,_,moment) {
                                 .then(function(data) {
                                     if (!data || data.length === 0)
                                         return;
-                                    processNotifications();
+                                    processNotifications(data);
                                 })
                                 .catch(function(error){
                                     if(error.data && error.data.statusCode==401){
@@ -198,8 +198,10 @@ function(app, iosound,template,_,moment) {
                         } else {
                             localNotifications = data;
                         }
-                        $scope.notifications = [];
-                        $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
+                        $timeout(function(){
+                            $scope.notifications = [];
+                            $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
+                        });
                     }
 
                     ion.sound({
