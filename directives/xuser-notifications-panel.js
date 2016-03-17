@@ -44,9 +44,9 @@ function(app, iosound,template,_,moment) {
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
-                 
-                    
-                    
+
+
+
                     //============================================================
                     //
                     //
@@ -73,7 +73,7 @@ function(app, iosound,template,_,moment) {
                                             "createdOn": {
                                                 "$gt": new Date(notification.createdOn).toISOString()
                                             },
-                                            
+
                                             $or:[{'state': 'read'},{'state': 'unread'}]
                                         }]
                                     };
@@ -159,6 +159,12 @@ function(app, iosound,template,_,moment) {
                     $rootScope.$on('event:server-pushNotification', function(evt,data){
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
+                        }
+                        else if(data.type == 'notificationStatus'){
+                            var notification = _.findWhere($scope.notifications, {id: data.data.id});
+                            if(notification)
+                                 $timeout(function(){notification.state = data.data.state;});
+
                         }
                     });
 
