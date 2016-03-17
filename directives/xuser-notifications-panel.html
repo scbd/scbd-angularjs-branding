@@ -1,0 +1,108 @@
+<div id="NotificationsPanel"> 
+    
+    <div class="row" style="margin:0 0 20px 0;padding:0;">
+        <div class="col-xs-12">
+            <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    All Notifications     
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                    <li><a href="#">All Notifications</a></li>
+                    <li><a href="#">Unread</a></li>
+                    <li><a href="#">Read</a></li>
+                    </ul>
+                </div>
+                
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    All Events
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                    <li><a href="#">All Events</a></li>
+                    <li><a href="#">Expired Request</a></li>
+                    <li><a href="#">Publishing Requests</a></li>
+                    </ul>
+                </div>
+                
+                 <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    All Records
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                    <li><a href="#">All Records</a></li>
+                    <li><a href="#">CNA</a></li>
+                    <li><a href="#">MSR</a></li>
+                    </ul>
+                </div>
+                
+                 <div class="btn-group" role="group">
+                     <input type="text" class="form-control" placeholder="unique identifier or keyword" style="width:200px"></input>
+                 </div>
+                
+            </div>
+        </div>
+    </div> 
+       
+    <div class="row" style="margin:0;padding:0;border-bottom:1px solid #ccc;">  
+        <div class="col-xs-10">
+            <strong>Message</strong>
+        </div> 
+        <div class="col-xs-2 text-center">
+            <strong>Read</strong>
+        </div>  
+    </div>
+
+    <div class="row" style="height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;" ng-repeat="notification in notifications" ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}">  
+        <div class="col-xs-2 text-center">
+            <div style="margin-top:10px;">
+                
+                <div ng-if="notification.data.action==='timedout'" >
+                    <i class="fa fa-lg fa-clock-o"> </i> 
+                    <br/>
+                    <span style="white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;">Request Expired</span>
+                </div>
+                    
+                <div ng-if="notification.data.action==='request'">
+                    <i class="fa fa-lg fa-thumbs-o-up"> </i> 
+                    <br/>
+                    <span  style="white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;">Publishing Request</span>
+                </div>
+                
+                <div style="white-space:nowrap;font-size:12px;font-weight:bold;text-transform:uppercase;">
+                    <span style="color:#fa6938"  ng-if="notification.data.documentInfo.realm==='ABS-DEV'">
+                        DEVELOPMENT
+                    </span>
+                    <span style="color:#069554" ng-if="notification.data.documentInfo.realm==='ABS'">
+                        ABSCH
+                    </span>
+                    <span style="color:#fa6938"  ng-if="notification.data.documentInfo.realm==='ABS-TRG'">
+                        TRAINING
+                    </span>
+                </div>
+                
+            </div>
+        </div> 
+        <div class="col-xs-8">
+           <div style="margin-top:10px">
+                {{notification.data.documentInfo.realm}}
+           </div>
+        </div> 
+        <div class="col-xs-2 text-center">
+            <div style="margin-top:15px;">
+                <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                <a href="#" ng-show="notification.state==='read'"   ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                <br>
+                <span style="white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;">{{timePassed(notification.createdOn)}} ago</span>
+            </div>
+        </div>  
+    </div>
+       
+    <div ng-show="!notifications">
+        <span class="color-grey">no recent activity</span>
+    </div>
+    
+</div>

@@ -1,0 +1,11 @@
+
+
+#NotificationsPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+}
+
+#NotificationsPanel .notification-unread {
+    background-color:#EEE;
+}
+
