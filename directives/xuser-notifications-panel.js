@@ -50,6 +50,7 @@ function(app, iosound,template,_,moment) {
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
 
+
                     //============================================================
                     //
                     //

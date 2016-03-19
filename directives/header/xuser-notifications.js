@@ -158,6 +158,12 @@ function(app, iosound,template,_,moment) {
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
                         }
+                        else if(data.type == 'notificationStatus'){
+                            var notification = _.findWhere($scope.notifications, {id: data.data.id});
+                            if(notification)
+                                 $timeout(function(){notification.state = data.data.state;});
+
+                        }
                     });
 
                     $scope.getURL = function(notification){
