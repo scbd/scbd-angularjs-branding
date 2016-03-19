@@ -22,7 +22,8 @@ function(app, iosound,template,_,moment) {
             replace: true,
             template: template,
             scope: {
-                 realm: '@',
+                 pagesize: '@',
+                 page: '@',
             },
             link: function ($scope, element, attrs){
               if(attrs.hideCloseButton)
@@ -32,21 +33,33 @@ function(app, iosound,template,_,moment) {
 
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
-                        '$timeout', '$filter','authentication','cfgUserNotification',
+                        '$timeout', '$filter','authentication','cfgUserNotification','$location',
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
-                        authentication, cfgUserNotification) {
-
+                        authentication, cfgUserNotification, $location) {
 
                     var pageNumber = 0;
-                    var pageLength = 10;
-                    // var canQuery = true;
+                    var pageLength = 100;
+                    
+                    if($scope.pagesize)
+                        var pageLength = $scope.pagesize;
+                        
+                    if($scope.page)
+                        var pageNumber = $scope.page;
 
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
-                 
-                    
-                    
+
+                    //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.goto = function(notification) {
+                        $scope.updateStatus(notification);
+                        var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
+                        $location.url(url);
+                    };
+
                     //============================================================
                     //
                     //
@@ -73,7 +86,7 @@ function(app, iosound,template,_,moment) {
                                             "createdOn": {
                                                 "$gt": new Date(notification.createdOn).toISOString()
                                             },
-                                            
+
                                             $or:[{'state': 'read'},{'state': 'unread'}]
                                         }]
                                     };
@@ -159,6 +172,12 @@ function(app, iosound,template,_,moment) {
                     $rootScope.$on('event:server-pushNotification', function(evt,data){
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
+                        }
+                        else if(data.type == 'notificationStatus'){
+                            var notification = _.findWhere($scope.notifications, {id: data.data.id});
+                            if(notification)
+                                 $timeout(function(){notification.state = data.data.state;});
+
                         }
                     });
 
