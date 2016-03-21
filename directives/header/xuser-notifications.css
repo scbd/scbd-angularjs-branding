@@ -1,44 +1,50 @@
-
-#CBD-Branding .notifications {
-  width:100%;
-
+#NotificationsHeaderPanel * {
+    font-size:10px;
 }
-#CBD-Branding .notifications table, #CBD-Branding .notifications  th, #CBD-Branding .notifications td {
-  border-bottom: 1px solid #ddd;
-}
-
-#CBD-Branding .notification-item {
-    padding: 0 5px;
-    padding-bottom:10px;
-    margin: 5px 5px;
-    /*background: #ccc;*/
-    border-bottom:1px solid #ddd;
-}
-#CBD-Branding .notification-read  i, #CBD-Branding .notification-read  span, #CBD-Branding .notification-read div, #CBD-Branding .notification-read td, #CBD-Branding .notification-read strong, #CBD-Branding .notification-read a {
-    color:#bbb !important;
+#NotificationsHeaderPanel i {
+    font-size:14px;
+    margin-right:5px;
 }
 
-
-#CBD-Branding .notification-unread  i, #CBD-Branding .notification-unread strong{
-    color:#428bca !important;
+#NotificationsHeaderPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+    
 }
 
-#CBD-Branding .notification-unread  span , #CBD-Branding .notification-unread  div, #CBD-Branding .notification-unread  td  {
-    color:#333 !important;
-}
-@media (max-width: 767px) {
-  #CBD-Branding .notifications {
-
-    width:95%;
-
-  }
+#NotificationsHeaderPanel .notification-unread {
+    background-color:#EEE;
+    color:#111;
 }
 
-#CBD-Branding .notifications-panel{
-margin: 10px 10px 10px 10px ;
-  max-height:400px;overflow: scroll;
+#NotificationsHeaderPanel .notification-panel-header {
+    margin:0;padding:0;border-bottom:1px solid #ccc;
 }
-#CBD-Branding .col-centered{
-float: none;
-margin: 0 auto;
+#NotificationsHeaderPanel .notification-row {
+    min-height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;
+}
+#NotificationsHeaderPanel .notification-icon-text{
+    white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+
+#NotificationsHeaderPanel .notification-message{
+    cursor:pointer;font-weight:500;font-size:11px;
+}
+#NotificationsHeaderPanel .notification-label{
+   text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-spacing5{
+   margin-top:5px;
+}
+#NotificationsHeaderPanel .notification-spacing10{
+   margin-top:10px;
+}
+#NotificationsHeaderPanel .notification-spacing15{
+   margin-top:15px;
+}
+#NotificationsHeaderPanel .notification-timer{
+   white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-title{
+   font-size:12px;
 }

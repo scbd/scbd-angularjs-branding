@@ -38,7 +38,7 @@ function(app, iosound,template,_,moment) {
                         authentication, cfgUserNotification, $location) {
 
                     var pageNumber = 0;
-                    var pageLength = 100;
+                    var pageLength = 1000;
                     
                     if($scope.pagesize)
                         var pageLength = $scope.pagesize;
@@ -50,7 +50,6 @@ function(app, iosound,template,_,moment) {
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
 
-
                     //============================================================
                     //
                     //
@@ -60,6 +59,39 @@ function(app, iosound,template,_,moment) {
                         var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
                         $location.url(url);
                     };
+                    
+                    
+                     //*************************************************************************************************************************************
+                     $scope.hasState = function(item) {
+                            if(!$scope.stateFilter || $scope.stateFilter === 'All'){
+                                return true;
+                            }
+                            if($scope.stateFilter === item.state){
+                                return item;
+                            }
+                            else{
+                                return false;
+                            }
+                        };
+                        
+                    //*************************************************************************************************************************************
+                     $scope.hasType = function(item) {
+                            if(!$scope.typeFilter || $scope.typeFilter === 'All'){
+                                return true;
+                            }
+                            if($scope.typeFilter ==='request' && item.data.action==='request' && item.data.iteration===1){
+                                    return item;
+                            }
+                            else if ($scope.typeFilter ==='reminder' && item.data.action==='request' && item.data.iteration > 1){
+                               return item ;   
+                            } 
+                            else if($scope.typeFilter === item.data.action){
+                                return item;
+                            }
+                            else 
+                                return false;
+                        };
+               
 
                     //============================================================
                     //

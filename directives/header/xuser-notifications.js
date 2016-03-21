@@ -34,18 +34,28 @@ function(app, iosound,template,_,moment) {
 
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
-                        '$timeout', '$filter','authentication','cfgUserNotification',
+                        '$timeout', '$filter','authentication','cfgUserNotification','$location',
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
-                        authentication, cfgUserNotification) {
-
+                        authentication, cfgUserNotification, $location) {
 
                     var pageNumber = 0;
-                    var pageLength = 10;
+                    var pageLength = 1000;
                     // var canQuery = true;
 
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
+                    
+                     //============================================================
+                    //
+                    //
+                    //============================================================
+                    $scope.goto = function(notification) {
+                        $scope.updateStatus(notification);
+                        var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
+                        $location.url(url);
+                    };
+                    
                     //============================================================
                     //
                     //

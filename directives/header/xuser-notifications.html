@@ -1,66 +1,172 @@
-<div  id="CBD-Branding" class="row">
-<div class="col-lg-12 col-centered">
-  <div class="panel panel-default notifications-panel">
-    <div class="panel-heading"><h5 style="margin: 0 0 0 0;"><img src="/app/libs/scbd-branding/images/cbd-leaf-green.svg" style="height:18px;display: inline; float: left;" />CBD User Notifications </h5>
-      <md-button class="md-icon-button " style="float:right;position:absolute;top:1px;right:25px;" aria-label="Settings" ng-click="showInView()" ng-if="!hideCloseButton">
-        <md-icon md-font-set="material-icons">close</md-icon>
-      </md-button>
-    </div>
-    <div class="panel-body">
-    <table  class="notifications">
-        <tr >
-            <th>Message</th>
-            <th>Read</th>
-        </tr>
-        <tr ng-repeat="notification in notifications" class="notification-item" ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }">
+<div id="NotificationsHeaderPanel" style="height:600px;overflow: scroll;"> 
 
-            <!--<td>
-                <div style="margin-top:3px;padding-right:3px;">
-                    <i class="material-icons" style="font-size:16pt;position:relative;top:3px;"
-                    ng-class="{'color-green':(notification.data.action!='approved'||notification.data.action=='completed'||notification.data.action=='recalled'), 'color-grey':notification.data.action=='rejected'}">
-                    {{notification.data.documentInfo.metadata.schema | schemaIcon}}</i>
+
+    <div class="row notification-row" ng-repeat="notification in notifications" ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}">  
+         
+         <!--TIMEOUT=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='timedout'" >
+             
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                    <span class="notification-title">
+                        <i class="fa fa-lg fa-clock-o"> </i>
+                        Publishing request expired </span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Details: </span> 
+                          <span class="notification-label">Publishing Requests are automatically expired by the system after 90 days </span>
+                     </div> 
                 </div>
-            </td>-->
-            <td ng-class="{'notification-read':notification.state=='read','notification-unread':notification.state=='unread' }" style="padding:10px 0;cursor:pointer;">
-
-                <a ng-href="{{getURL(notification)}}" ng-click="markAsRead(notification);" class="skipNotificationPanel">
-
-                    <i ng-class="{'color-blue':notification.state=='unread'}">
-                        <i class="fa fa-envelope" style="font-size:15px" ng-show="notification.type=='message'"></i>
-                        <i class="fa fa-bell" style="font-size:15px" ng-show="notification.type=='documentNotification'"></i>
-                        {{notification.createdBy_info.firstName + ' ' + notification.createdBy_info.lastName}}</i>
-                    <span ng-show="notification.type=='message'"> has sent you a message</span>
-                    <span ng-show="notification.data.action=='request'"> has sent you a request for publishing for</span>
-                    <span ng-show="notification.data.action=='approved'"> has approved your publishing request for</span>
-                    <span ng-show="notification.data.action=='rejected'"> has rejected your publishing request for</span>
-                    <span ng-show="notification.data.action=='recalled'"> has recalled publishing request for</span>
-
-                    <strong><i ng-class="{'color-blue':notification.state=='unread'}">
-                        {{(notification.data.documentInfo.title||notification.data.subject)|lstring}}
-                    </i></strong>
-                    <span ng-show="notification.type=='documentNotification'"> ({{notification.data.documentInfo.metadata.schema|schemaName}})</span>
-                </a>
-                <br>{{timePassed(notification.createdOn)}} ago
-
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS'">from ABSCH</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-TRG'">from ABSCH TRAINING</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'ABS-DEV'">from ABSCH DEVELOPMENT</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'CHM'">from CHM</span>
-                <span class="label label-default" ng-show="notification.data.documentInfo.realm == 'BCH'">from BCH</span>
-
-
-            </td>
-            <td style="width:20px;vertical-align:middle;">
-                <a href="#" ng-show="notification.state=='unread'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                <a href="#" ng-show="notification.state=='read'" class="pull-right" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
-            </td>
-        </tr>
-    </table>
-
-    <div ng-show="!notifications">
-        <span class="color-grey">no recent activity</span>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+             
+         </div>
+         
+         
+        <!--REQUEST=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='request' && notification.data.iteration===1" >
+             
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                    <i class="fa fa-lg fa-rotate-right"> </i>
+                    <span class="notification-title">Publishing request</span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Requested by: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+              
+         </div>
+         
+         <!--REMINDER=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='request' && notification.data.iteration>1" >
+              
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                      <i class="fa fa-lg fa-calendar"> </i>
+                    <span class="notification-title">Reminder: Publishing request pending approval. </span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Requested by: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+             
+         </div>
+         
+          <!--RECALLED=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='recalled'">
+              
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                      <i class="fa fa-lg fa-rotate-left"> </i>
+                    <span class="notification-title">Request Recalled </span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Recalled by: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+             
+         </div>
+         
+          <!--REJECTED=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='rejected'">
+              
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                      <i class="fa fa-lg fa-times-circle"> </i>
+                    <span class="notification-title">Request Rejected </span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Rejected by: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+              
+         </div>
+         
+        
+         <!--APPROVED=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='approved'">
+              
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                      <i class="fa fa-lg fa-check-circle"> </i>
+                    <span class="notification-title">Request Approved</span>
+                    <div class="notification-spacing5">
+                        <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span> 
+                        <span> {{notification.data.documentInfo.title | lstring:locale }}  </span>
+                     </div>
+                     <div class="hidden-xs notification-spacing5">
+                          <span class="notification-label">Approved by: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1 text-center" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+              
+         </div>
+         
+         <!--MESSAGE=======================================-->
+         <div class="notification-spacing10" ng-if="notification.data.action==='message'">
+              
+              <div class="col-xs-11">
+                  <div class="notification-message" ng-click="goto(notification);">
+                      <i class="fa fa-lg fa-envelope-o"> </i>
+                    <span class="notification-title">Message</span>
+                    <div class="notification-spacing5">
+                        message
+                     </div>
+                     <div class="notification-spacing5">
+                          <span class="notification-label">Sent from: </span> 
+                          <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>  
+                          <span class="notification-label"> on </span>  
+                          <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                     </div> 
+                </div>
+              </div>
+              <div class="col-xs-1" class="notification-timer" >{{timePassed(notification.createdOn)}} </div>
+         </div>
+         
+    <div style="margin-top:10px;" ng-if="!notifications" >
+        <div class="col-xs-12 text-center">
+            <span class="color-grey"> no notifications </span>
+        </div>
     </div>
-</div>
-</div>
-</div>
+    
 </div>
