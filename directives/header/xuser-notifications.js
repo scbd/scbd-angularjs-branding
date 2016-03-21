@@ -73,7 +73,7 @@ function(app, iosound,template,_,moment) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             // if (canQuery) {
                             var queryMyNotifications;
-                            queryMyNotifications = {$or:[{'state': 'read'},{'state': 'unread'}]};
+                            queryMyNotifications = {$and:[{'state': 'unread'}]};
                             if ($scope.notifications) {
                                 var notification = _.first($scope.notifications);
                                 if (notification)
@@ -82,7 +82,8 @@ function(app, iosound,template,_,moment) {
                                             "createdOn": {
                                                 "$gt": new Date(notification.createdOn).toISOString()
                                             },
-                                            $or:[{'state': 'read'},{'state': 'unread'}]
+                                            "state": 'unread',
+                                      
                                         }]
                                     };
                             }
