@@ -24,6 +24,7 @@ function(app, iosound,template,_,moment) {
             scope: {
                  pagesize: '@',
                  page: '@',
+                 docId: '=',
             },
             link: function ($scope, element, attrs){
               if(attrs.hideCloseButton)
@@ -112,7 +113,7 @@ function(app, iosound,template,_,moment) {
                             // if (canQuery) {
                             var queryMyNotifications;
                             queryMyNotifications = {$or:[{'state': 'read'},{'state': 'unread'}]};
-                            if ($scope.notifications) {
+                            if ($scope.notifications && !scope.docId) {
                                 var notification = _.first($scope.notifications);
                                 if (notification)
                                     queryMyNotifications = {
@@ -125,6 +126,10 @@ function(app, iosound,template,_,moment) {
                                         }]
                                     };
                             }
+                            
+                            if($scope.docId)
+                                queryMyNotifications = { $and : [{"data.documentInfo.identifier": $scope.docId}]};
+                            
                             //$and: [{"_id": {"$gt": notification._id}}]
                             var continueNotification = true;
                             userNotifications.query(queryMyNotifications, pageNumber, pageLength)
