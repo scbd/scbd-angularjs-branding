@@ -27,7 +27,7 @@
          
          
         <!--REQUEST=======================================-->
-         <div class="notification-spacing10" ng-if="notification.data.action==='request' && notification.data.iteration===1" >
+         <div class="notification-spacing10" ng-if="notification.data.action==='request' && (!notification.data.iteration || notification.data.iteration===1)" >
              
               <div class="col-xs-11">
                   <div class="notification-message" ng-click="goto(notification);">
