@@ -98,7 +98,7 @@
          
          
         <!--REQUEST=======================================-->
-         <div class="notification-spacing10" ng-if="notification.data.action==='request' && notification.data.iteration===1" >
+         <div class="notification-spacing10" ng-if="notification.data.action==='request' && && (!notification.data.iteration || notification.data.iteration===1)" >
               <div class="col-xs-2 text-center hidden-xs">
                 <div class="notification-spacing5">
                     <i class="fa fa-lg fa-rotate-right"> </i> 
