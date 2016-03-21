@@ -79,7 +79,7 @@ function(app, iosound,template,_,moment) {
                             if(!$scope.typeFilter || $scope.typeFilter === 'All'){
                                 return true;
                             }
-                            if($scope.typeFilter ==='request' && item.data.action==='request' && item.data.iteration===1){
+                            if($scope.typeFilter ==='request' && item.data.action==='request' && (!item.data.iteration || item.data.iteration===1)){
                                     return item;
                             }
                             else if ($scope.typeFilter ==='reminder' && item.data.action==='request' && item.data.iteration > 1){
