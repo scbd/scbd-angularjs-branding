@@ -3,7 +3,7 @@ define(['app','ionsound',
   'css!./xuser-notifications-panel',
   'scbd-angularjs-filters/schema-name',
   'scbd-angularjs-filters/l-string',
-  'scbd-angularjs-services/user-notifications'],
+  'scbd-angularjs-services/user-notifications', './infinite-scroll-directive'],
 function(app, iosound,template,_,moment) {
     app.service("cfgUserNotificationPanel", function(){
         var notificationUrls = {
@@ -38,12 +38,14 @@ function(app, iosound,template,_,moment) {
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location) {
 
+                    $scope.loading = false;
                     var pageNumber = 0;
-                    var pageLength = 1000;
-                    
+                    var pageLength = 30;
+                    var notificationCount;
+
                     if($scope.pagesize)
                         var pageLength = $scope.pagesize;
-                        
+
                     if($scope.page)
                         var pageNumber = $scope.page;
 
@@ -61,8 +63,8 @@ function(app, iosound,template,_,moment) {
                         var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
                         $location.url(url);
                     };
-                    
-                    
+
+
                      //*************************************************************************************************************************************
                      $scope.hasState = function(item) {
                             if(!$scope.stateFilter || $scope.stateFilter === 'All'){
@@ -75,7 +77,7 @@ function(app, iosound,template,_,moment) {
                                 return false;
                             }
                         };
-                        
+
                     //*************************************************************************************************************************************
                      $scope.hasType = function(item) {
                             if(!$scope.typeFilter || $scope.typeFilter === 'All'){
@@ -85,15 +87,15 @@ function(app, iosound,template,_,moment) {
                                     return item;
                             }
                             else if ($scope.typeFilter ==='reminder' && item.data.action==='request' && item.data.iteration > 1){
-                               return item ;   
-                            } 
+                               return item ;
+                            }
                             else if($scope.typeFilter === item.data.action){
                                 return item;
                             }
-                            else 
+                            else
                                 return false;
                         };
-               
+
 
                     //============================================================
                     //
@@ -110,33 +112,19 @@ function(app, iosound,template,_,moment) {
                     //============================================================
                     getNotification = function() {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
-                            // if (canQuery) {
-                            var queryMyNotifications;
-                            queryMyNotifications = {$or:[{'state': 'read'},{'state': 'unread'}]};
-                            if ($scope.notifications && !scope.docId) {
-                                var notification = _.first($scope.notifications);
-                                if (notification)
-                                    queryMyNotifications = {
-                                        $and: [{
-                                            "createdOn": {
-                                                "$gt": new Date(notification.createdOn).toISOString()
-                                            },
+                            $scope.loading = true;
 
-                                            $or:[{'state': 'read'},{'state': 'unread'}]
-                                        }]
-                                    };
-                            }
-                            
-                            if($scope.docId)
-                                queryMyNotifications = { $and : [{"data.documentInfo.identifier": $scope.docId}]};
-                            
-                            //$and: [{"_id": {"$gt": notification._id}}]
-                            var continueNotification = true;
-                            userNotifications.query(queryMyNotifications, pageNumber, pageLength)
+                            userNotifications.query({}, pageNumber, pageLength, count)
                                 .then(function(data) {
-                                    if (!data || data.length === 0)
-                                        return;
-                                    processNotifications(data);
+
+                                    if(count)
+                                        notificationCount = data.count;
+                                    else {
+                                        if (!data || data.length === 0)
+                                            return;
+
+                                        processNotifications(data);
+                                    }
                                 })
                                 .catch(function(error){
                                     if(error.data && error.data.statusCode==401){
@@ -144,12 +132,11 @@ function(app, iosound,template,_,moment) {
                                         //authentication.getUser(true);
                                          continueNotification = false;
                                     }
+                                })
+                                .finally(function(){
+                                    $scope.loading = false;
                                 });
-
-
-                            //}
                         }
-
                     };
                     //============================================================
                     //
@@ -197,20 +184,10 @@ function(app, iosound,template,_,moment) {
                         return notification && notification.state == 'unread';
                     };
 
-
-                    getNotification();
-
-                    $rootScope.$watch('user', function(newVla,oldVal){
-                        //console.log(newVla,oldVal)
-                        if(newVla && newVla!=oldVal){
-                            if(newVla.isAuthenticated)
-                                getNotification();
-                        }
-                    });
-
                     $rootScope.$on('event:server-pushNotification', function(evt,data){
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
+                            notificationCount++;
                         }
                         else if(data.type == 'notificationStatus'){
                             var notification = _.findWhere($scope.notifications, {id: data.data.id});
@@ -274,6 +251,20 @@ function(app, iosound,template,_,moment) {
                         path: "/app/libs/ionsound/sounds/",
                         preload: true
                     });
+
+
+                    $scope.loadNotifications = function(){
+                        // console.log('load Notification')
+                        if($scope.loading || notificationCount <= pageNumber + pageLength)
+                            return;
+                        $scope.loading = true;
+
+                         pageNumber = pageNumber + pageLength;
+                         getNotification();
+                    }
+
+                    getNotification(1);//notification count;
+                    getNotification();
 
                 }
             ]

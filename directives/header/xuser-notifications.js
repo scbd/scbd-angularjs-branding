@@ -3,7 +3,7 @@ define(['app','ionsound',
   'css!./xuser-notifications',
   'scbd-angularjs-filters/schema-name',
   'scbd-angularjs-filters/l-string',
-  'scbd-angularjs-services/user-notifications'],
+  'scbd-angularjs-services/user-notifications', '../infinite-scroll-directive'],
 function(app, iosound,template,_,moment) {
     app.service("cfgUserNotification", function(){
         var notificationUrls = {
@@ -38,14 +38,14 @@ function(app, iosound,template,_,moment) {
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location) {
 
+                    $scope.loading = false;
                     var pageNumber = 0;
-                    var pageLength = 1000;
-                    // var canQuery = true;
+                    var pageLength = 30;
 
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
-                    
+
                      //============================================================
                     //
                     //
@@ -55,7 +55,7 @@ function(app, iosound,template,_,moment) {
                         var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
                         $location.url(url);
                     };
-                    
+
                     //============================================================
                     //
                     //
@@ -71,29 +71,19 @@ function(app, iosound,template,_,moment) {
                     //============================================================
                     getNotification = function() {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
-                            // if (canQuery) {
                             var queryMyNotifications;
                             queryMyNotifications = {$and:[{'state': 'unread'}]};
-                            if ($scope.notifications) {
-                                var notification = _.first($scope.notifications);
-                                if (notification)
-                                    queryMyNotifications = {
-                                        $and: [{
-                                            "createdOn": {
-                                                "$gt": new Date(notification.createdOn).toISOString()
-                                            },
-                                            "state": 'unread',
-                                      
-                                        }]
-                                    };
-                            }
-                            //$and: [{"_id": {"$gt": notification._id}}]
-                            var continueNotification = true;
-                            userNotifications.query(queryMyNotifications, pageNumber, pageLength)
+
+                            userNotifications.query(queryMyNotifications, pageNumber, pageLength, count)
                                 .then(function(data) {
-                                    if (!data || data.length === 0)
-                                        return;
-                                    processNotifications(data);
+
+                                    if(count)
+                                        $scope.notificationCount = data.count;
+                                    else {
+                                        if (!data || data.length === 0)
+                                            return;
+                                        processNotifications(data);
+                                    }
                                 })
                                 .catch(function(error){
                                     if(error.data && error.data.statusCode==401){
@@ -101,12 +91,11 @@ function(app, iosound,template,_,moment) {
                                         //authentication.getUser(true);
                                          continueNotification = false;
                                     }
+                                })
+                                .finally(function(){
+                                    $scope.loading = false;
                                 });
-
-
-                            //}
                         }
-
                     };
                     //============================================================
                     //
@@ -154,20 +143,20 @@ function(app, iosound,template,_,moment) {
                         return notification && notification.state == 'unread';
                     };
 
-
-                    getNotification();
-
                     $rootScope.$watch('user', function(newVla,oldVal){
                         //console.log(newVla,oldVal)
                         if(newVla && newVla!=oldVal){
-                            if(newVla.isAuthenticated)
+                            if(newVla.isAuthenticated){
+                                getNotification(1);//notification count;
                                 getNotification();
+                            }
                         }
                     });
 
                     $rootScope.$on('event:server-pushNotification', function(evt,data){
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
+                            $scope.notificationCount++;
                         }
                         else if(data.type == 'notificationStatus'){
                             var notification = _.findWhere($scope.notifications, {id: data.data.id});
@@ -231,6 +220,17 @@ function(app, iosound,template,_,moment) {
                         path: "/app/libs/ionsound/sounds/",
                         preload: true
                     });
+
+                    $scope.loadNotifications = function(){
+                        // console.log('load Notification')
+                        if($scope.loading || $scope.notificationCount <= pageNumber + pageLength)
+                            return;
+                        $scope.loading = true;
+
+                         pageNumber = pageNumber + pageLength;
+                         getNotification();
+                    }
+
 
                 }
             ]
