@@ -60,7 +60,7 @@ function(app, iosound,template,_,moment) {
                     $scope.goto = function(notification) {
                         if(notification.state==='unread')
                           $scope.updateStatus(notification);
-                        var url = "/register/" +  notification.data.documentInfo.metadata.schema + "/" + notification.data.documentInfo.identifier + "/view";
+                        var url = "/register/" +  $filter("mapSchema")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
                         $location.url(url);
                     };
 
