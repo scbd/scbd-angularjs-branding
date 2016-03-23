@@ -113,8 +113,13 @@ function(app, iosound,template,_,moment) {
                     getNotification = function(count) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             $scope.loading = true;
+                            
+                             var queryMyNotifications = {};
+                            
+                             if($scope.docId)
+                                 queryMyNotifications = { $and : [{"data.documentInfo.identifier": $scope.docId}]};
 
-                            userNotifications.query({}, pageNumber, pageLength, count)
+                            userNotifications.query(queryMyNotifications, pageNumber, pageLength, count)
                                 .then(function(data) {
 
                                     if(count)
