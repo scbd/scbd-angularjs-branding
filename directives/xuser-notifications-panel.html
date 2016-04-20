@@ -5,13 +5,13 @@
             <div class="btn-group" role="group">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span ng-if="!stateFilter || stateFilter=='All'">All Notifications</span>
+                        <span ng-if="!stateFilter || stateFilter=='All'">All</span>
                         <span ng-if="stateFilter=='unread'">Unread</span>
                         <span ng-if="stateFilter=='read'">Read</span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" ng-click="stateFilter = 'All'">All Notifications</a></li>
+                        <li><a href="#" ng-click="stateFilter = 'All'">All</a></li>
                         <li><a href="#" ng-click="stateFilter = 'unread'">Unread</a></li>
                         <li><a href="#" ng-click="stateFilter = 'read'">Read</a></li>
                     </ul>
@@ -19,7 +19,7 @@
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span ng-if="!typeFilter || typeFilter=='All'">All Notification Types</span>
+                        <span ng-if="!typeFilter || typeFilter=='All'">All Types</span>
                         <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> Messages</span>
                         <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"> </i> Publishing Requests</span>
                         <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"> </i> Reminders</span>
@@ -30,7 +30,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" ng-click="typeFilter = 'All'"> All Notification Types</a></li>
+                        <li><a href="#" ng-click="typeFilter = 'All'"> All Types</a></li>
                         <li>
                             <a href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> Messages</a>
                         </li>
@@ -351,5 +351,9 @@
             </div>
 
         </div>
+    </div>
+
+    <div ng-if="!notifications || (notifications | filter:keyword | filter:hasState | filter:hasType).length <= 0" style="margin-left:50%;">
+        <strong>You have 0 notifications</strong>
     </div>
 </div>
