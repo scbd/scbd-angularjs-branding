@@ -1,6 +1,6 @@
 define(['app',
  'text!./account.html',
-  'css!./account',  
+  'css!./account',
   'scbd-angularjs-services/authentication',
 ],
 function(app, template) {
@@ -12,8 +12,8 @@ function(app, template) {
                   scope: {
                        user: '=',
                   },
-                  controller: ['$scope', '$window', '$location','authentication',
-                  function($scope, $window, $location,authentication) {
+                  controller: ['$scope', '$window', '$location','authentication', '$http',
+                  function($scope, $window, $location,authentication, $http) {
                     if(!$scope.user || !$scope.user.isAuthenticated )
                       getUser();
                     //==========================
@@ -21,7 +21,14 @@ function(app, template) {
                     //============================================================
                     function getUser() {
                       return authentication.getUser().then(function(u){
-                    		$scope.user = u;
+                    		    $scope.user = u;
+                                //roles?q={"":
+
+                                var roleQuery = {roles : u.roles };
+                                $http.get('/api/v2013/roles' , {params : {q : roleQuery}})
+                                .then(function(data){
+                                    $scope.userRoles = data.data;
+                                })
                 			});
                     }
                     //==========================
