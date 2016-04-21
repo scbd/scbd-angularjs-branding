@@ -1,4 +1,4 @@
-<div id="NotificationsHeaderPanel" style="height:600px;overflow: scroll;">
+<div id="NotificationsHeaderPanel" style="max-height:600px;overflow: scroll;">
 
     <div infinite-scroll="loadNotifications()" infinite-scroll-disabled="loading" infinite-scroll-distance="12" infinite-scroll-parent="true">
 
@@ -143,15 +143,12 @@
             </div>
 
             <!--MESSAGE=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='message'">
+            <div class="notification-spacing10" ng-if="notification.type==='message'">
 
                 <div class="col-xs-11">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="fa fa-lg fa-envelope-o"> </i>
-                        <span class="notification-title">Message</span>
-                        <div class="notification-spacing5">
-                            message
-                        </div>
+                         <div class="notification-title notification-spacing5">{{notification.data.message}}</div>
                         <div class="notification-spacing5">
                             <span class="notification-label">Sent from: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>

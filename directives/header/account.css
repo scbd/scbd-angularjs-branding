@@ -19,10 +19,18 @@
   position: absolute;
   left: -16px;
 }
-
-
+@media screen and (max-width: 480px) {
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -150px;
+    top: 23px;
+  }
+}
 @media screen and (min-width: 250px) {
-
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
   #CBD-Branding.dropdown-menu li a {
     font-size: 16px;
   }
@@ -42,7 +50,10 @@
     color: black;
     font-size: 14px;
   }
-
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
   #CBD-Branding.dropdown-menu {
     background-color: white;
     padding: 3px;
@@ -59,5 +70,11 @@
   }
   #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
     background-image: none;
+  }
+}
+@media screen and (min-width: 810px) {
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: 0px;
   }
 }
