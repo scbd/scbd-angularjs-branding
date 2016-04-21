@@ -1,32 +1,38 @@
 <div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
 
+
+
     <a id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
-        <span>
-          <i class="fa fa-bell color-cbdlitegrey">
-              <span ng-show="(notifications|filter:isUnread).length > 0 " class="fa-badge fa-badge--overlap" style="right: 0px;top: -11px;" data-badge="{{(notifications|filter:isUnread).length}}"></span>
-        </i>
+        <span ng-show="notifications && (notifications|filter:isUnread).length > 0 ">
+            <i class="fa fa-bell color-cbdlitegrey">
+              <span  class="fa-badge fa-badge--overlap" style="right: 0px;top: -11px;" data-badge="{{(notifications|filter:isUnread).length}}"></span>
+             </i>
         </span>
-        <span>
+        <span ng-show="!notifications || (notifications|filter:isUnread).length === 0 ">
           <i class="fa fa-bell-o" class="bg-grey"></i>
       </span>
     </a>
 
-    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs"
-    ng-click="enableInfiniteScroll=!enableInfiniteScroll">
-        <span>
-           <i class="fa fa-bell color-cbdlitegrey">
-               <span ng-show="(notifications|filter:isUnread).length > 0 " class="fa-badge fa-badge--overlap" style="right: 0px;top: -11px;"data-badge="{{notificationUnreadCount}}"></span>
-        </i>
+
+    <div class="hidden-xs">
+        <span ng-show="notifications && (notifications|filter:isUnread).length > 0 ">
+            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs"   ng-click="enableInfiniteScroll=!enableInfiniteScroll">
+                 <i class="fa fa-bell color-cbdlitegrey">
+                    <span class="fa-badge fa-badge--overlap" style="right: 0px;top: -11px;"data-badge="{{notificationUnreadCount}}"></span>
+                </i>
+            </a>
+
         </span>
-        <span ng-show="(notifications|filter:isUnread).length <= 0">
-          <i class="fa fa-bell-o" class="bg-grey"></i>
+        <span ng-show="!notifications || (notifications|filter:isUnread).length <= 0 ">
+            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs"   ng-click="enableInfiniteScroll=!enableInfiniteScroll">
+                <i class="fa fa-bell-o" class="bg-grey"></i>
+            </a>
       </span>
-    </a>
+    </div>
 
     <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel" style="position:relative;top:22px;left:20px;">
-
         <div class="n-drop-down" style="width:600px;padding:0;margin:0;z-index:1100;">
-            <div ng-if="(notifications|filter:isUnread).length > 0 ">
+            <div ng-if="notifications.length > 0 ">
                 <div xuser-notifications hide-close-button="true"></div>
                 <div>
                     <a ng-href="{{viewAllUrl}}" style="cursor:pointer;">
@@ -34,9 +40,7 @@
                     </a>
                 </div>
             </div>
-            <div ng-if="!notifications || (notifications|filter:isUnread).length <= 0">
-                <strong>You have 0 notifications</strong>
-            </div>
+          
         </div>
     </div>
 </div>
