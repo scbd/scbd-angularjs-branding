@@ -11,7 +11,8 @@
       </span>
     </a>
 
-    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs">
+    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs"
+    ng-click="enableInfiniteScroll=!enableInfiniteScroll">
         <span>
            <i class="fa fa-bell color-cbdlitegrey">
                <span ng-show="(notifications|filter:isUnread).length > 0 " class="fa-badge fa-badge--overlap" style="right: 0px;top: -11px;"data-badge="{{notificationUnreadCount}}"></span>

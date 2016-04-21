@@ -147,7 +147,7 @@ function(app, iosound,template,_,moment) {
 
                     $rootScope.$watch('user', function(newVla,oldVal){
                         //console.log(newVla,oldVal)
-                        if(newVla && newVla!=oldVal){
+                        if(newVla && !angular.equals(newVla, oldVal)){
                             if(newVla.isAuthenticated){
                                 getNotification(1);//notification count;
                                 getNotification();
@@ -234,7 +234,7 @@ function(app, iosound,template,_,moment) {
 
                     $scope.loadNotifications = function(){
                         // console.log('load Notification')
-                        if($scope.loading || $scope.notificationCount <= pageNumber + pageLength)
+                        if(!$scope.enableInfiniteScroll || $scope.loading || $scope.notificationCount <= pageNumber + pageLength)
                             return;
                         $scope.loading = true;
 
