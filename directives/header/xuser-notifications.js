@@ -165,10 +165,17 @@ function(app, iosound,template,_,moment) {
                         }
                         else if(data.type == 'notificationStatus'){
                             var notification = _.findWhere($scope.notifications, {id: data.data.id});
-                            if(notification)
+                            if(notification){
                                  $timeout(function(){
                                      notification.state = data.data.state;
                                  });
+                            }
+                             else{
+                                 userNotifications.get(data.data.id)
+                                 .then(function(data) {
+                                     processNotifications([data]);
+                                 });
+                             }
                          if(data.data.state == 'read')
                             $scope.notificationUnreadCount--;
                          else if(data.data.state == 'unread')
