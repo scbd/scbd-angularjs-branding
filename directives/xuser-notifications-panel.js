@@ -193,7 +193,7 @@ function(app, iosound,template,_,moment) {
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
                             notificationCount++;
-                            if(ion)
+                            //if(ion)
                                 //ion.sound.play("bell_ring");
                         }
                         else if(data.type == 'notificationStatus'){
@@ -239,7 +239,7 @@ function(app, iosound,template,_,moment) {
                         } else {
                             localNotifications = data;
 
-                            if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
+                            //if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
                                 //ion.sound.play("bell_ring");
                         }
                         $timeout(function(){
