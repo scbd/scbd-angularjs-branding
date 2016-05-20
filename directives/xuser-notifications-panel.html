@@ -137,7 +137,7 @@
                             <span class="notification-label">Requested by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                             <span class="notification-label">Requested by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                             <span class="notification-label">Recalled by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
                             <span class="notification-label">Rejected by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>
@@ -292,7 +292,7 @@
                             <span class="notification-label">Approved by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>
@@ -321,12 +321,12 @@
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
                         <div class="notification-title notification-spacing5">{{notification.data.message}}</div>
-                       
+
                         <div class="hidden-xs notification-spacing5">
                             <span class="notification-label">Sent from: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | date:"dd MMM yyyy hh:mm"}} </span>
+                            <span> {{notification.createdOn | formatDate:"dd MMM YYYY hh:mm"}} </span>
                         </div>
                     </div>
                 </div>

@@ -102,7 +102,7 @@ function(app, iosound,template,_,moment) {
                     //
                     //============================================================
                     $scope.timePassed = function(createdOn) {
-                        var timespan = moment(createdOn);
+                        var timespan = moment.utc(createdOn);
                         return timespan.startOf('hours').fromNow(true);
                     };
     	           var notificationTimer;
@@ -113,9 +113,9 @@ function(app, iosound,template,_,moment) {
                     getNotification = function(count) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             $scope.loading = true;
-                            
+
                              var queryMyNotifications = {};
-                            
+
                              if($scope.docId)
                                  queryMyNotifications = { $and : [{"data.documentInfo.identifier": $scope.docId}]};
 
