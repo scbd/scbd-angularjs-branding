@@ -193,8 +193,8 @@ function(app, iosound,template,_,moment) {
                         if(data.type == 'userNotification'){
                             processNotifications([data.data]);
                             notificationCount++;
-                            if(ion)
-                                ion.sound.play("bell_ring");
+                            //if(ion)
+                                //ion.sound.play("bell_ring");
                         }
                         else if(data.type == 'notificationStatus'){
                             var notification = _.findWhere($scope.notifications, {id: data.data.id});
@@ -239,8 +239,8 @@ function(app, iosound,template,_,moment) {
                         } else {
                             localNotifications = data;
 
-                            if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
-                                ion.sound.play("bell_ring");
+                            //if(ion && _.some(localNotifications,function(notification){return notification.state == "unread"}))
+                                //ion.sound.play("bell_ring");
                         }
                         $timeout(function(){
                             $scope.notifications = [];
