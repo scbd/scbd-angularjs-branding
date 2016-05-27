@@ -1,8 +1,7 @@
 define(['app','ionsound',
   'text!./xuser-notifications-panel.html','lodash','moment',
   'css!./xuser-notifications-panel',
-  'scbd-angularjs-filters/schema-name',
-  'scbd-angularjs-filters/l-string',
+  'scbd-angularjs-filters',
   'scbd-angularjs-services/user-notifications', './infinite-scroll-directive'],
 function(app, iosound,template,_,moment) {
     app.service("cfgUserNotificationPanel", function(){
