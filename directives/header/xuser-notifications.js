@@ -156,11 +156,15 @@ function(app, iosound,template,_,moment) {
 
                     $rootScope.$on('event:server-pushNotification', function(evt,data){
                         if(data.type == 'userNotification'){
-                            processNotifications([data.data]);
-                            $scope.notificationCount++;
-                            $scope.notificationUnreadCount++;
-                            //if(ion)
-                           //     ion.sound.play("bell_ring");
+                            
+                            userNotifications.get(data.data.id)
+                            .then(function(notification) {
+                                processNotifications([notification]);
+                                $scope.notificationCount++;
+                                $scope.notificationUnreadCount++;
+                                //if(ion)
+                                    //ion.sound.play("bell_ring");
+                            });
                         }
                         else if(data.type == 'notificationStatus'){
                             var notification = _.findWhere($scope.notifications, {id: data.data.id});
