@@ -10,14 +10,14 @@ function(app, template) {
                        ngModel: '=',
                      },
                   template: template,
-                  controller: ['$scope', '$window', '$location','authentication',
-                  function($scope, $window, $location,authentication) {
-                    if(authentication.isEmailVerified())
-                      $scope.showEmailVerificationMessage = 'Email verification pending. Please verify you email before submitting any data.';
-                    else
-                      $scope.showEmailVerificationMessage = 0;
-
-
+                  controller: ['$scope', '$window', '$location','authentication', '$rootScope',
+                  function($scope, $window, $location,authentication, $rootScope) {
+                      
+                      
+                      $rootScope.$on('event:auth-emailVerification', function(evt, data){
+                        $scope.showEmailVerificationMessage = data.message;
+                      });
+                      
                       $scope.showMessage = function (){
                         if($scope.showEmailVerificationMessage)
                           return true;
