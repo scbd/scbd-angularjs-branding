@@ -55,14 +55,6 @@ function(app, iosound,template,_,moment) {
                         $location.url(url);
                     };
 
-                    //============================================================
-                    //
-                    //
-                    //============================================================
-                    $scope.timePassed = function(createdOn) {
-                        var timespan = moment.utc(createdOn);
-                        return timespan.startOf('hours').fromNow(true);
-                    };
     	           var notificationTimer;
                     //============================================================
                     //

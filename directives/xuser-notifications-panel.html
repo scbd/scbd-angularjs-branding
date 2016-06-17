@@ -108,7 +108,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -146,7 +146,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -183,7 +183,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -222,7 +222,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -261,7 +261,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -301,7 +301,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
@@ -335,7 +335,7 @@
                         <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
-                        <span class="notification-timer">{{timePassed(notification.createdOn)}}
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
                         </span>
                     </div>
