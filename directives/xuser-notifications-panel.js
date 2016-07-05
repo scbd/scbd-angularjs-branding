@@ -1,9 +1,9 @@
-define(['app',//'ionsound',
+define(['app',
   'text!./xuser-notifications-panel.html','lodash','moment',
   'css!./xuser-notifications-panel',
   'scbd-angularjs-filters',
   'scbd-angularjs-services/user-notifications', './infinite-scroll-directive'],
-function(app, iosound,template,_,moment) {
+function(app, template,_,moment) {
     
     app.directive('xuserNotificationsPanel', function() {
         return {
