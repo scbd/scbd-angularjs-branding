@@ -1,27 +1,95 @@
-define(['app','ionsound',
+define(['app',//'ionsound',
   'text!./xuser-notifications.html','lodash','moment',
   'css!./xuser-notifications',
   'scbd-angularjs-filters',
   'scbd-angularjs-services/user-notifications', '../infinite-scroll-directive'],
 function(app, iosound,template,_,moment) {
-    app.service("cfgUserNotification", function(){
+     app.service("cfgUserNotification", ['$location', '$window', function($location, $window){
+       
         var notificationUrls = {
             documentNotificationUrl     : '/register/requests/',
             viewAllNotificationUrl      : '/register/requests',
             documentMessageUrl          : '/mailbox/'
         };
+       var productionRealms = {
+            urls : ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
+            realms : ['ABS', 'CHM']
+        }
+
+        var developmentRealms = {
+            urls : ['https://absch.cbddev.xyz', 'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 'https://accounts.cbddev.xyz',
+                    'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'],
+            realms : ['ABS-DEV', 'CHM-DEV']
+        }
+
+        var trainingRealms = {
+            urls : ['https://training-absch.cbd.int'],
+            realms : ['ABS-TRG']
+        }
+
+        function realmsForQuery(){
+            if(_.some(productionRealms.urls, function(url){
+                return $location.absUrl().indexOf(url)>=0;
+            }))
+               return productionRealms.realms;
+            
+            if(_.some(developmentRealms.urls, function(url){
+                return $location.absUrl().indexOf(url)>=0;
+            }))
+               return developmentRealms.realms;
+            
+            if(_.some(trainingRealms.urls, function(url){
+                return $location.absUrl().indexOf(url)>=0;
+            }))
+               return trainingRealms.realms;
+        }
+
+        function notificationUrl(notification) {
+             switch(notification.data.documentInfo.realm.toUpperCase()){
+                case 'ABS' :
+                    url = 'https://absch.cbd.int';break;
+                case 'ABS-DEV' :
+                    url = 'https://absch.cbddev.xyz';break;
+                case 'ABS-TRG' :
+                    url = 'https://training-absch.cbd.int';break;
+                case 'CHM' :
+                    url = 'https://chm.cbd.int';break;
+                case 'CHM-DEV' :
+                    url = 'https://dev-chm.cbd.int';break;
+            }
+            //if same realm url avoid using window redirect
+            if($location.absUrl().indexOf(url)>=0 || $location.absUrl().indexOf('http://localhost:')>=0)
+                url = '';
+
+            var path;
+            if(_.contains(['ABS', 'ABS-DEV', 'ABS-TRG'], notification.data.documentInfo.realm.toUpperCase())){
+                path = "/register/" +  $filter("mapSchema")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
+            }
+            else{
+                path = $scope.getURL(notification);
+            }
+
+            if(url!= ''){
+                $window.location.href = url + path;
+            }
+            else{
+               return path;
+            }
+        }
 
         return {
-            notificationUrls : notificationUrls
+            notificationUrls : notificationUrls,
+            realmsForQuery   : realmsForQuery,
+            notificationUrl  : notificationUrl
         };
-    });
+    }]);
     app.directive('xuserNotifications', function() {
         return {
             restrict: 'EAC',
             replace: true,
             template: template,
-//needed to hide button in drop down but isolete scope make parent directive disapear
-// stephane help!!!! why is angular crazy here or more like what am I not seeing?
+            //needed to hide button in drop down but isolete scope make parent directive disapear
+            // stephane help!!!! why is angular crazy here or more like what am I not seeing?
             // scope: {
             //      hideCloseButton: '@',
             // },
@@ -41,6 +109,8 @@ function(app, iosound,template,_,moment) {
                     var pageNumber = 0;
                     var pageLength = 30;
 
+                    var realmsForQuery = cfgUserNotification.realmsForQuery();
+                    
                     $scope.showInView =function(){
                       userNotifications.viewAll=!userNotifications.viewAll;
                     }
@@ -50,8 +120,18 @@ function(app, iosound,template,_,moment) {
                     //
                     //============================================================
                     $scope.goto = function(notification) {
-                        $scope.updateStatus(notification);
-                        var url = "/register/" +  $filter("mapSchema")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
+                        if(notification.state==='unread')
+                          $scope.updateStatus(notification);
+
+                        var url = ''
+
+                        if(notification.data && notification.data.documentInfo){
+                           url = cfgUserNotification.notificationUrl(notification);
+                        }
+                        else{
+                            url = $scope.getURL(notification);
+                        }
+
                         $location.url(url);
                     };
 
@@ -63,8 +143,11 @@ function(app, iosound,template,_,moment) {
                     getNotification = function(count) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             var queryMyNotifications;
-                            queryMyNotifications = {$and:[{'state': 'unread'}]};
-
+                            queryMyNotifications = {
+                                                        $and:[{'state': 'unread'}],
+                                                        'data.documentInfo.realm' : { $in  : realmsForQuery }
+                                                   };
+                            
                             userNotifications.query(queryMyNotifications, pageNumber, pageLength, count)
                                 .then(function(data) {
 
@@ -223,16 +306,16 @@ function(app, iosound,template,_,moment) {
                         });
                     }
 
-                    ion.sound({
-                        sounds: [
-                            {
-                                name: "bell_ring"
-                            }
-                        ],
-                        volume: 0.5,
-                        path: "/app/libs/ionsound/sounds/",
-                        preload: true
-                    });
+                    // ion.sound({
+                    //     sounds: [
+                    //         {
+                    //             name: "bell_ring"
+                    //         }
+                    //     ],
+                    //     volume: 0.5,
+                    //     path: "/app/libs/ionsound/sounds/",
+                    //     preload: true
+                    // });
 
                     $scope.loadNotifications = function(){
                         // console.log('load Notification')

@@ -45,7 +45,7 @@ function(app, template, $) {
                     function connectWithToken(){
                         apiToken.get()
                             .then(function(token){
-                                socketioService.connect(token);
+                                socketioService.connect(token.token);
                             });
                     }
                 }

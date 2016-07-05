@@ -1,20 +1,10 @@
-define(['app','ionsound',
+define(['app',//'ionsound',
   'text!./xuser-notifications-panel.html','lodash','moment',
   'css!./xuser-notifications-panel',
   'scbd-angularjs-filters',
   'scbd-angularjs-services/user-notifications', './infinite-scroll-directive'],
 function(app, iosound,template,_,moment) {
-    app.service("cfgUserNotificationPanel", function(){
-        var notificationUrls = {
-            documentNotificationUrl     : '/register/requests/',
-            viewAllNotificationUrl      : '/register/requests',
-            documentMessageUrl          : '/mailbox/'
-        };
-
-        return {
-            notificationUrls : notificationUrls
-        };
-    });
+    
     app.directive('xuserNotificationsPanel', function() {
         return {
             restrict: 'EAC',
@@ -33,9 +23,11 @@ function(app, iosound,template,_,moment) {
 
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
-                        '$timeout', '$filter','authentication','cfgUserNotification','$location',
+                        '$timeout', '$filter','authentication','cfgUserNotification','$location', '$window',
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
-                        authentication, cfgUserNotification, $location) {
+                        authentication, cfgUserNotification, $location, $window) {
+
+                    var realmsForQuery = cfgUserNotification.realmsForQuery();
 
                     $scope.loading = false;
                     var pageNumber = 0;
@@ -59,7 +51,16 @@ function(app, iosound,template,_,moment) {
                     $scope.goto = function(notification) {
                         if(notification.state==='unread')
                           $scope.updateStatus(notification);
-                        var url = "/register/" +  $filter("mapSchema")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
+
+                        var url = ''
+
+                        if(notification.data && notification.data.documentInfo){
+                           url = cfgUserNotification.notificationUrl(notification);
+                        }
+                        else{
+                            url = $scope.getURL(notification);
+                        }
+
                         $location.url(url);
                     };
 
@@ -103,11 +104,14 @@ function(app, iosound,template,_,moment) {
                     getNotification = function(count) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             $scope.loading = true;
-
-                             var queryMyNotifications = {};
+                            
+                             var queryMyNotifications = {'data.documentInfo.realm' : {$in  : realmsForQuery}};
 
                              if($scope.docId)
-                                 queryMyNotifications = { $and : [{"data.documentInfo.identifier": $scope.docId}]};
+                                 queryMyNotifications = { 
+                                     'data.documentInfo.realm' : {$in  : realmsForQuery},
+                                     $and : [{"data.documentInfo.identifier": $scope.docId}]
+                                    };
 
                             userNotifications.query(queryMyNotifications, pageNumber, pageLength, count)
                                 .then(function(data) {
@@ -184,8 +188,12 @@ function(app, iosound,template,_,moment) {
                             
                             userNotifications.get(data.data.id)
                             .then(function(notification) {
-                                processNotifications([notification]);
-                                notificationCount++;
+                                 if(notification.data && notification.data.documentInfo){
+                                   if(_.contains(realmsForQuery, notification.data.documentInfo.realm.toUpperCase())){
+                                        processNotifications([notification]);
+                                        notificationCount++;
+                                   }
+                                }
                                 //if(ion)
                                     //ion.sound.play("bell_ring");
                             });
@@ -242,16 +250,16 @@ function(app, iosound,template,_,moment) {
                         });
                     }
 
-                    ion.sound({
-                        sounds: [
-                            {
-                                name: "bell_ring"
-                            }
-                        ],
-                        volume: 0.5,
-                        path: "/app/libs/ionsound/sounds/",
-                        preload: true
-                    });
+                    // ion.sound({
+                    //     sounds: [
+                    //         {
+                    //             name: "bell_ring"
+                    //         }
+                    //     ],
+                    //     volume: 0.5,
+                    //     path: "/app/libs/ionsound/sounds/",
+                    //     preload: true
+                    // });
 
 
                     $scope.loadNotifications = function(){
