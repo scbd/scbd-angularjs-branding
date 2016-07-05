@@ -48,21 +48,24 @@ function(app, template,_,moment) {
                     //
                     //
                     //============================================================
-                    $scope.goto = function(notification) {
-                        if(notification.state==='unread')
-                          $scope.updateStatus(notification);
+                     $scope.goto = function (notification) {
+                            var waitTime = 0;
+                            if (notification.state === 'unread') {
+                                $scope.updateStatus(notification);
+                                waitTime = 300;
+                            }
+                            $timeout(function () {
+                                var url = ''
+                                if (notification.data && notification.data.documentInfo) {
+                                    url = cfgUserNotification.notificationUrl(notification);
+                                }
+                                else {
+                                    url = $scope.getURL(notification);
+                                }
 
-                        var url = ''
-
-                        if(notification.data && notification.data.documentInfo){
-                           url = cfgUserNotification.notificationUrl(notification);
-                        }
-                        else{
-                            url = $scope.getURL(notification);
-                        }
-
-                        $location.url(url);
-                    };
+                                $location.url(url);
+                            }, waitTime);
+                        };
 
 
                      //*************************************************************************************************************************************
@@ -249,18 +252,6 @@ function(app, template,_,moment) {
                             $scope.notifications = $filter("orderBy")(localNotifications, 'createdOn', true);
                         });
                     }
-
-                    // ion.sound({
-                    //     sounds: [
-                    //         {
-                    //             name: "bell_ring"
-                    //         }
-                    //     ],
-                    //     volume: 0.5,
-                    //     path: "/app/libs/ionsound/sounds/",
-                    //     preload: true
-                    // });
-
 
                     $scope.loadNotifications = function(){
                         // console.log('load Notification')
