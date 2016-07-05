@@ -22,13 +22,11 @@ function(app, template) {
                     function getUser() {
                       return authentication.getUser().then(function(u){
                     		    $scope.user = u;
-                                //roles?q={"":
-
-                                var roleQuery = {roles : u.roles };
-                                $http.get('/api/v2013/roles' , {params : {q : roleQuery}})
-                                .then(function(data){
-                                    $scope.userRoles = data.data;
-                                })
+                                // var roleQuery = {roles : u.roles };
+                                // $http.get('/api/v2013/roles' , {params : {q : roleQuery}})
+                                // .then(function(data){
+                                //     $scope.userRoles = data.data;
+                                // })
                 			});
                     }
                     //==========================
