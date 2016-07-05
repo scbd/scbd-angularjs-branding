@@ -1,9 +1,9 @@
-define(['app',//'ionsound',
+define(['app',
   'text!./xuser-notifications.html','lodash','moment',
   'css!./xuser-notifications',
   'scbd-angularjs-filters',
   'scbd-angularjs-services/user-notifications', '../infinite-scroll-directive'],
-function(app, iosound,template,_,moment) {
+function(app, template,_,moment) {
      app.service("cfgUserNotification", ['$location', '$window', function($location, $window){
        
         var notificationUrls = {
