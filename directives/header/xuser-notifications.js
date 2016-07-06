@@ -1,63 +1,4 @@
 define(['app',
-<<<<<<< HEAD
-  'text!./xuser-notifications.html','lodash','moment',
-  'css!./xuser-notifications',
-  'scbd-angularjs-filters',
-  'scbd-angularjs-services/user-notifications', '../infinite-scroll-directive'],
-function(app, template,_,moment) {
-     app.service("cfgUserNotification", ['$location', '$window', function($location, $window){
-       
-        var notificationUrls = {
-            documentNotificationUrl     : '/register/requests/',
-            viewAllNotificationUrl      : '/register/requests',
-            documentMessageUrl          : '/mailbox/'
-        };
-       var productionRealms = {
-            urls : ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
-            realms : ['ABS', 'CHM']
-        }
-
-        var developmentRealms = {
-            urls : ['https://absch.cbddev.xyz', 'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 'https://accounts.cbddev.xyz',
-                    'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'],
-            realms : ['ABS-DEV', 'CHM-DEV']
-        }
-
-        var trainingRealms = {
-            urls : ['https://training-absch.cbd.int'],
-            realms : ['ABS-TRG']
-        }
-
-        function realmsForQuery(){
-            if(_.some(productionRealms.urls, function(url){
-                return $location.absUrl().indexOf(url)>=0;
-            }))
-               return productionRealms.realms;
-            
-            if(_.some(developmentRealms.urls, function(url){
-                return $location.absUrl().indexOf(url)>=0;
-            }))
-               return developmentRealms.realms;
-            
-            if(_.some(trainingRealms.urls, function(url){
-                return $location.absUrl().indexOf(url)>=0;
-            }))
-               return trainingRealms.realms;
-        }
-
-        function notificationUrl(notification) {
-             switch(notification.data.documentInfo.realm.toUpperCase()){
-                case 'ABS' :
-                    url = 'https://absch.cbd.int';break;
-                case 'ABS-DEV' :
-                    url = 'https://absch.cbddev.xyz';break;
-                case 'ABS-TRG' :
-                    url = 'https://training-absch.cbd.int';break;
-                case 'CHM' :
-                    url = 'https://chm.cbd.int';break;
-                case 'CHM-DEV' :
-                    url = 'https://dev-chm.cbd.int';break;
-=======
     'text!./xuser-notifications.html', 'lodash', 'moment',
     'css!./xuser-notifications',
     'scbd-angularjs-filters',
@@ -73,7 +14,6 @@ function(app, template,_,moment) {
             var productionRealms = {
                 urls: ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
                 realms: ['ABS', 'CHM']
->>>>>>> handle notifications navigation
             }
 
             var developmentRealms = {
