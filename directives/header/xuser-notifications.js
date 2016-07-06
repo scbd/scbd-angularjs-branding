@@ -72,7 +72,7 @@ define(['app',
 
                 var path;
                 if (_.contains(['ABS', 'ABS-DEV', 'ABS-TRG'], notification.data.documentInfo.realm.toUpperCase())) {
-                    path = "/register/" + $filter("mapSchema")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
+                    path = "/register/" + $filter("schemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
                 }
                 else {
                     path = $scope.getURL(notification);
