@@ -2,9 +2,9 @@ define(['app',
     'text!./xuser-notifications.html', 'lodash', 'moment',
     'css!./xuser-notifications',
     'scbd-angularjs-filters',
-    'scbd-angularjs-services/user-notifications', '../infinite-scroll-directive'],
+    'scbd-angularjs-services/user-notifications', 'ngInfiniteScroll'],
     function (app, template, _, moment) {
-        app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
+        app.service("cfgUserNotification", ['$scope', '$location', '$window', '$filter', function ($scope, $location, $window, $filter) {
 
             var notificationUrls = {
                 documentNotificationUrl: '/register/requests/',
