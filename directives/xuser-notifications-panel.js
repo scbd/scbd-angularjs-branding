@@ -2,7 +2,7 @@ define(['app',
   'text!./xuser-notifications-panel.html','lodash','moment',
   'css!./xuser-notifications-panel',
   'scbd-angularjs-filters',
-  'scbd-angularjs-services/user-notifications', 'ngInfiniteScroll'],
+  'scbd-angularjs-services/user-notifications', 'ngInfiniteScroll', './header/xuser-notification-config-service'],
 function(app, template,_,moment) {
     
     app.directive('xuserNotificationsPanel', function() {
@@ -60,7 +60,7 @@ function(app, template,_,moment) {
                                     url = cfgUserNotification.notificationUrl(notification);
                                 }
                                 else {
-                                    url = $scope.getURL(notification);
+                                    url = cfgUserNotification.getURL(notification);
                                 }
 
                                 $location.url(url);
@@ -208,19 +208,6 @@ function(app, template,_,moment) {
 
                         }
                     });
-
-                    $scope.getURL = function(notification){
-                        //console.log(notification)
-                        if(cfgUserNotification.notificationUrls &&
-                        !cfgUserNotification.notificationUrls.documentNotificationUrl)
-                            throw "Invalid User Notification Configuration, documentNotificationUrl is missing.";
-
-                        if(notification.type=='documentNotification')
-                            return cfgUserNotification.notificationUrls.documentNotificationUrl
-                                    + notification.data.workflowId;
-                        else
-                            return cfgUserNotification.notificationUrls.documentMessageUrl + notification.id;
-                    }
 
                     $rootScope.$on('onNotificationStatusChanged', function(evt,data){
                         // console.log('onNotificationStatusChanged',data)
