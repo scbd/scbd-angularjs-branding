@@ -202,9 +202,16 @@ function(app, template,_,moment) {
                             });
                         }
                         else if(data.type == 'notificationStatus'){
-                            var notification = _.findWhere($scope.notifications, {id: data.data.id});
-                            if(notification)
-                                 $timeout(function(){notification.state = data.data.state;});
+                            if(data.message == 'markAllRead'){
+                                _.each($scope.notifications, function(notification){
+                                    notification.state = 'read';
+                                });
+                            }
+                            else {
+                                var notification = _.findWhere($scope.notifications, {id: data.data.id});
+                                if(notification)
+                                    $timeout(function(){notification.state = data.data.state;});
+                            }
 
                         }
                     });
@@ -248,6 +255,14 @@ function(app, template,_,moment) {
 
                          pageNumber = pageNumber + pageLength;
                          getNotification();
+                    }
+                    $scope.markAllRead = function(){
+                         userNotifications.markAllRead(realmsForQuery)
+                            .then(function() {
+                                _.each($scope.notifications, function(notification){
+                                    notification.state = 'read';
+                                });
+                            });
                     }
 
                     getNotification(1);//notification count;

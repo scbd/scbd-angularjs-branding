@@ -166,23 +166,30 @@ define(['app',
                                     });
                             }
                             else if (data.type == 'notificationStatus') {
-                                var notification = _.findWhere($scope.notifications, { id: data.data.id });
-                                if (notification) {
-                                    $timeout(function () {
-                                        notification.state = data.data.state;
+                                 if(data.message == 'markAllRead'){
+                                    _.each($scope.notifications, function(notification){
+                                        notification.state = 'read';
                                     });
+                                    $scope.notificationUnreadCount = 0;
                                 }
                                 else {
-                                    userNotifications.get(data.data.id)
-                                        .then(function (data) {
-                                            processNotifications([data]);
+                                    var notification = _.findWhere($scope.notifications, { id: data.data.id });
+                                    if (notification) {
+                                        $timeout(function () {
+                                            notification.state = data.data.state;
                                         });
+                                    }
+                                    else {
+                                        userNotifications.get(data.data.id)
+                                            .then(function (data) {
+                                                processNotifications([data]);
+                                            });
+                                    }
+                                    if (data.data.state == 'read')
+                                        $scope.notificationUnreadCount--;
+                                    else if (data.data.state == 'unread')
+                                        $scope.notificationUnreadCount++;
                                 }
-                                if (data.data.state == 'read')
-                                    $scope.notificationUnreadCount--;
-                                else if (data.data.state == 'unread')
-                                    $scope.notificationUnreadCount++;
-
                             }
                         });
                         
@@ -228,6 +235,15 @@ define(['app',
                             getNotification();
                         }
 
+                        $scope.markAllRead = function(evt){
+                            evt.stopPropagation()
+                            userNotifications.markAllRead(realmsForQuery)
+                                .then(function() {
+                                    _.each($scope.notifications, function(notification){
+                                        notification.state = 'read';
+                                    });
+                                });
+                        }
 
                     }
                 ]
