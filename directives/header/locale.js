@@ -1,6 +1,7 @@
 define(['app',
  'text!./locale.html',
   'css!./locale',
+  'scbd-angularjs-services/locale',
   'scbd-angularjs-services/authentication',
 ],
 function(app, template, $) {
@@ -11,9 +12,15 @@ function(app, template, $) {
                        ngModel: '=',
                      },
                   template: template,
-                  controller: ['$scope', '$window', '$location','authentication',
-                  function($scope, $window, $location,authentication) {
+                  controller: ['$scope', '$window', '$location','authentication', 'locale',
+                  function($scope, $window, $location,authentication, locale) {
                   // code for seling locale
+                      $scope.currentLanguage = locale;
+                      $scope.changeLanguage = function(lang){
+                         
+                          $location.search({ returnUrl: $location.url() });
+                          $location.path('/lang/'+ lang);
+                      }
 
                   }],//controller
         };//return
