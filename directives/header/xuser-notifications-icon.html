@@ -1,17 +1,15 @@
-﻿<div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated" style="padding-right:10px;">
+<div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated" style="padding-right:10px;">
 
     <a id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
-         <span>
+         <span style="padding-right:5px;">
            <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
+                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"> </span>
         </span>
     </a>
 
     <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
-        <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
-        </span>
+                    <span ng-show="notificationUnreadCount > 0" class="badge bg-red" >{{notificationUnreadCount}}</span>
+                    <i style="padding-right:5px;" ng-show="!notificationUnreadCount" class="fa fa-bell-o" ></i>
     </a>
 
     <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel" style="position:relative;top:22px;left:20px;">
@@ -25,7 +23,7 @@
                  </div>
             
                 <div>
-                    <a ng-href="{{viewAllUrl}}" style="cursor:pointer;">
+                    <a translation-url ng-href="{{viewAllUrl}}" style="cursor:pointer;">
                         <h5 class="color-cbdgrey"><i class="glyphicon glyphicon-circle-arrow-right"></i> view all notifications </h5>
                     </a>
                 </div>
